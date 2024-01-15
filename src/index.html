@@ -6,6 +6,7 @@
         <title>A-Frame Model Loading</title>
         <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
         <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+        <script src="app/teleport.js"></script>
     </head>
     <body>
         <a-scene>
@@ -25,6 +26,21 @@
             </a-assets>
 
             <!-- <a-entity camera look-controls wasd-controls></a-entity> -->
+            <a-camera id="js--camera">
+                <!-- Cursor -->
+                <a-cursor 
+                  animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 100; from: 0.1 0.1 0.1; to: 1 1 1"
+                  animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1000; from: 1 1 1; to: 0.1 0.1 0.1"
+                  animation="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+                  id="js--cursor"
+                  cursor="fuse: true; fuseTimeout: 1000"
+                  material="shader: flat"
+                  color="black"
+                  geometry="primitive: ring; radiusInner: 0.007; radiusOuter: 0.01"
+                  position="0 0 -0.5"
+                  raycaster="objects: .js--place, .js--interact"
+                ></a-cursor>
+            </a-camera>
 
             <!-- Lighting -->
             <a-entity light="type: ambient;
@@ -41,12 +57,17 @@
             </a-entity>
 
             <!-- Kitchen -->
-            <a-plane src="#ground" position="0.5 0.99 0" width="3" height="3" rotation="-90 0 0"></a-plane> <!-- Floor -->
-            <a-plane position="0.5 1.73 -1.5" width="3" height="1.5" rotation="0 0 0" color="black"></a-plane> <!-- Front wall -->
-            <a-plane position="2 1.73 0" width="3" height="1.5" rotation="0 -90 0" color="black"></a-plane> <!-- Right Side wall -->
-            <a-plane position="0.5 1.73 1.5" width="3" height="1.5" rotation="-180 0 0" color="black"></a-plane> <!-- Back wall -->
-            <a-plane position="-1 1.73 0" width="3" height="1.5" rotation="-180 -90 0" color="black"></a-plane> <!-- Left Side wall -->
-            <a-plane position="0.5 2.45 0" width="3" height="3" rotation="-270 0 0" color="gray"></a-plane> <!-- Floor -->
+            <a-plane class="js--pixels js--interact" src="#ground" position="0.5 0.99 0" width="3" height="3" rotation="-90 0 0"></a-plane> <!-- Floor -->
+            <a-plane class="js--pixels js--interact" position="0.5 1.73 -1.5" width="3" height="1.5" rotation="0 0 0" color="black"></a-plane> <!-- Front wall -->
+            <a-plane class="js--pixels js--interact" position="2 1.73 0" width="3" height="1.5" rotation="0 -90 0" color="black"></a-plane> <!-- Right Side wall -->
+            <a-plane class="js--pixels js--interact" position="0.5 1.73 1.5" width="3" height="1.5" rotation="-180 0 0" color="black"></a-plane> <!-- Back wall -->
+            <a-plane class="js--pixels js--interact" position="-1 1.73 0" width="3" height="1.5" rotation="-180 -90 0" color="black"></a-plane> <!-- Left Side wall -->
+            <a-plane class="js--pixels js--interact" position="0.5 2.45 0" width="3" height="3" rotation="-270 0 0" color="gray"></a-plane> <!-- Floor -->
+
+            <!-- Teleport positions -->
+            <a-sphere class="js--place" position="5 1 3" radius="0.1" color="yellow"></a-sphere>
+            <a-sphere class="js--place" position="7 1 3" radius="0.1" color="yellow"></a-sphere>
+            <a-sphere class="js--place" position="9 1 3" radius="0.1" color="yellow"></a-sphere>
 
             <!-- Models -->
             <!-- Kitchen elements -->
