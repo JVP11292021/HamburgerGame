@@ -12,6 +12,8 @@
             <!-- Asset management -->
             <a-assets>
                 <img id="ground" src="../assets/ground.png">
+                <a-asset-item id="fridge-o" src="../assets/kitchen-elements/kitchenFridge.obj"></a-asset-item>
+                <a-asset-item id="fridge-m" src="../assets/kitchen-elements/kitchenFridge.mtl"></a-asset-item>
                 <a-asset-item id="kitchenStove-o" src="../assets/kitchen-elements/kitchenStoveElectric.obj"></a-asset-item>
                 <a-asset-item id="kitchenStove-m" src="../assets/kitchen-elements/kitchenStoveElectric.mtl"></a-asset-item>
                 <a-asset-item id="kitchenCabinet-o" src="../assets/kitchen-elements/kitchenCabinet.obj"></a-asset-item>
@@ -44,9 +46,10 @@
             <a-plane position="2 1.73 0" width="3" height="1.5" rotation="0 -90 0" color="black"></a-plane> <!-- Right Side wall -->
             <a-plane position="0.5 1.73 1.5" width="3" height="1.5" rotation="-180 0 0" color="black"></a-plane> <!-- Back wall -->
             <a-plane position="-1 1.73 0" width="3" height="1.5" rotation="-180 -90 0" color="black"></a-plane> <!-- Left Side wall -->
-            <a-plane position="0.5 2.4 0" width="3" height="3" rotation="-270 0 0" color="gray"></a-plane> <!-- Floor -->
+            <a-plane position="0.5 2.45 0" width="3" height="3" rotation="-270 0 0" color="gray"></a-plane> <!-- Floor -->
 
             <!-- Models -->
+            <!-- Kitchen elements -->
             <a-entity 
                 obj-model="obj: #kitchenStove-o; mtl: #kitchenStove-m"
                 position="0 1 1"
@@ -64,6 +67,7 @@
                 position="1.2 1 1"
             ></a-entity>
 
+            <!-- Cabinets -->
             <a-entity 
                 obj-model="obj: #kitchenCabinetSmall-o; mtl: #kitchenCabinetSmall-m"
                 position="1.2 1.7 1"
@@ -72,7 +76,28 @@
                 obj-model="obj: #kitchenCabinetSmall-o; mtl: #kitchenCabinetSmall-m"
                 position="0.8 1.7 1"
             ></a-entity>
-          
+            <a-entity 
+                obj-model="obj: #fridge-o; mtl: #fridge-m"
+                position="1.7 1 1"
+            ></a-entity>          
+
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="-0.5 1 -0.4"
+                rotation="0 -90 0"
+            ></a-entity>  
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="-0.5 1 0"
+                rotation="0 -90 0"
+            ></a-entity>  
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="-0.5 1 0.4"
+                rotation="0 -90 0"
+            ></a-entity>                                    
+            <!-- Utility models -->
+
             <!-- <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity> -->
         </a-scene>
     </body>
