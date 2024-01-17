@@ -1,1 +1,124 @@
-Hello world
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>A-Frame Model Loading</title>
+        <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+        <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+        <script src="app/teleport.js"></script>
+    </head>
+    <body>
+        <a-scene>
+            <!-- Asset management -->
+            <a-assets>
+                <img id="ground" src="../assets/ground.png">
+                <a-asset-item id="fridge-o" src="../assets/kitchen-elements/kitchenFridge.obj"></a-asset-item>
+                <a-asset-item id="fridge-m" src="../assets/kitchen-elements/kitchenFridge.mtl"></a-asset-item>
+                <a-asset-item id="kitchenStove-o" src="../assets/kitchen-elements/kitchenStoveElectric.obj"></a-asset-item>
+                <a-asset-item id="kitchenStove-m" src="../assets/kitchen-elements/kitchenStoveElectric.mtl"></a-asset-item>
+                <a-asset-item id="kitchenCabinet-o" src="../assets/kitchen-elements/kitchenCabinet.obj"></a-asset-item>
+                <a-asset-item id="kitchenCabinet-m" src="../assets/kitchen-elements/kitchenCabinet.mtl"></a-asset-item>
+                <a-asset-item id="kitchenSink-o" src="../assets/kitchen-elements/kitchenSink.obj"></a-asset-item>
+                <a-asset-item id="kitchenSink-m" src="../assets/kitchen-elements/kitchenSink.mtl"></a-asset-item>
+                <a-asset-item id="kitchenCabinetSmall-o" src="../assets/kitchen-elements/kitchenCabinetUpperDouble.obj"></a-asset-item>
+                <a-asset-item id="kitchenCabinetSmall-m" src="../assets/kitchen-elements/kitchenCabinetUpperDouble.mtl"></a-asset-item>
+            </a-assets>
+
+            <!-- <a-entity camera look-controls wasd-controls></a-entity> -->
+            <a-camera id="js--camera">
+                <!-- Cursor -->
+                <a-cursor 
+                  animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 100; from: 0.1 0.1 0.1; to: 1 1 1"
+                  animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1000; from: 1 1 1; to: 0.1 0.1 0.1"
+                  animation="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+                  id="js--cursor"
+                  cursor="fuse: true; fuseTimeout: 1000"
+                  material="shader: flat"
+                  color="black"
+                  geometry="primitive: ring; radiusInner: 0.007; radiusOuter: 0.01"
+                  position="0 0 -0.5"
+                  raycaster="objects: .js--place, .js--interact"
+                ></a-cursor>
+            </a-camera>
+
+            <!-- Lighting -->
+            <a-entity light="type: ambient;
+                            intensity: 0.2;"
+            ></a-entity>
+            <a-entity light="type: point; intensity: 0.8; distance: 10; castShadow: true">
+            </a-entity>
+            <a-entity light="type: directional;
+                            color: #FFFFFF;
+                            intensity: 0.6;
+                            castShadow: true"
+                    position="-0.5 1 1"
+            ></a-entity>
+            </a-entity>
+
+            <!-- Kitchen -->
+            <a-plane class="js--pixels js--interact" src="#ground" position="0.5 0.99 0" width="3" height="3" rotation="-90 0 0"></a-plane> <!-- Floor -->
+            <a-plane class="js--pixels js--interact" position="0.5 1.73 -1.5" width="3" height="1.5" rotation="0 0 0" color="black"></a-plane> <!-- Front wall -->
+            <a-plane class="js--pixels js--interact" position="2 1.73 0" width="3" height="1.5" rotation="0 -90 0" color="black"></a-plane> <!-- Right Side wall -->
+            <a-plane class="js--pixels js--interact" position="0.5 1.73 1.5" width="3" height="1.5" rotation="-180 0 0" color="black"></a-plane> <!-- Back wall -->
+            <a-plane class="js--pixels js--interact" position="-1 1.73 0" width="3" height="1.5" rotation="-180 -90 0" color="black"></a-plane> <!-- Left Side wall -->
+            <a-plane class="js--pixels js--interact" position="0.5 2.45 0" width="3" height="3" rotation="-270 0 0" color="gray"></a-plane> <!-- Floor -->
+
+            <!-- Teleport positions -->
+            <a-sphere id="teleportStation" class="js--place" position="-0.1827 1 -0.37453" radius="0.1" color="yellow"></a-sphere>
+            <a-sphere id="teleportKitchen" class="js--place" position="-0.12705 1 0.80525" radius="0.1" color="yellow"></a-sphere>
+
+            <!-- Models -->
+            <!-- Kitchen elements -->
+            <a-entity 
+                obj-model="obj: #kitchenStove-o; mtl: #kitchenStove-m"
+                position="0 1 1"
+            ></a-entity>
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="0.4 1 1"
+            ></a-entity>
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="0.8 1 1"
+            ></a-entity>
+            <a-entity 
+                obj-model="obj: #kitchenSink-o; mtl: #kitchenSink-m"
+                position="1.2 1 1"
+            ></a-entity>
+
+            <!-- Cabinets -->
+            <a-entity 
+                obj-model="obj: #kitchenCabinetSmall-o; mtl: #kitchenCabinetSmall-m"
+                position="1.2 1.7 1"
+            ></a-entity>
+            <a-entity 
+                obj-model="obj: #kitchenCabinetSmall-o; mtl: #kitchenCabinetSmall-m"
+                position="0.8 1.7 1"
+            ></a-entity>
+            <a-entity 
+                obj-model="obj: #fridge-o; mtl: #fridge-m"
+                position="1.7 1 1"
+            ></a-entity>          
+
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="-0.5 1 -0.4"
+                rotation="0 -90 0"
+            ></a-entity>  
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="-0.5 1 0"
+                rotation="0 -90 0"
+            ></a-entity>  
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="-0.5 1 0.4"
+                rotation="0 -90 0"
+            ></a-entity>                                    
+            <!-- Utility models -->
+
+            <!-- <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity> -->
+        </a-scene>
+    </body>
+</html>
