@@ -6,7 +6,9 @@
         <title>A-Frame Model Loading</title>
         <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
         <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+        <script src="app/pickup.js"></script>
         <script src="app/order.js"></script>
+        <script src="app/teleport.js"></script>
     </head>
     <body>
         <div class="test"></div>
@@ -27,6 +29,12 @@
                 <a-asset-item id="kitchenCabinetSmall-m" src="../assets/kitchen-elements/kitchenCabinetUpperDouble.mtl"></a-asset-item>
                 <a-asset-item id="burger--obj" src="../assets/burger-assets/Burger.obj"></a-asset-item>
                 <a-asset-item id="burger--mtl" src="../assets/burger-assets/Burger.mtl"></a-asset-item>
+                <a-asset-item id="lettuce--obj" src="../assets/burger-assets/Lettuce.obj"></a-asset-item>
+                <a-asset-item id="lettuce--mtl" src="../assets/burger-assets/Lettuce.mtl"></a-asset-item>
+                <a-asset-item id="cheese--obj" src="../assets/burger-assets/cheeseCut.obj"></a-asset-item>
+                <a-asset-item id="cheese--mtl" src="../assets/burger-assets/cheeseCut.mtl"></a-asset-item>
+                <a-asset-item id="plate--obj" src="../assets/burger-assets/Dish.obj"></a-asset-item>
+                <a-asset-item id="plate--mtl" src="../assets/burger-assets/Dish.mtl"></a-asset-item>
             </a-assets>
 
             <!-- <a-entity camera look-controls wasd-controls></a-entity> -->
@@ -147,7 +155,21 @@
             obj-model= "obj: #burger--obj; mtl: #burger--mtl"
             position="0 2 1"
             ></a-entity>
-
+            <a-entity
+            id="parentObject" 
+            class="js--pickup js--interact cheese"
+            scale="0.2 0.2 0.2"
+            obj-model= "obj: #cheese--obj; mtl: #cheese--mtl"
+            position="0 1.5 1"
+            ></a-entity>
+            <a-entity
+            class="js--placeholder js--interact"
+            obj-model="obj: #plate--obj; mtl: #plate--mtl"
+            position="-0.717 1.419 -0.237"
+            scale="0.9 0.9 0.9"
+        ></a-entity>
+           
+            
             <!-- <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity> -->
         </a-scene>
     </body>
