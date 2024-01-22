@@ -32,7 +32,22 @@
                 <a-asset-item id="bell-m" src="../assets/kitchen-elements/Bell.mtl"></a-asset-item>
                 <a-asset-item id="burger--obj" src="../assets/burger-assets/Burger.obj"></a-asset-item>
                 <a-asset-item id="burger--mtl" src="../assets/burger-assets/Burger.mtl"></a-asset-item>
+                <a-asset-item id="lettuce--obj" src="../assets/burger-assets/Lettuce.obj"></a-asset-item>
+                <a-asset-item id="lettuce--mtl" src="../assets/burger-assets/Lettuce.mtl"></a-asset-item>
+                <a-asset-item id="cheese--obj" src="../assets/burger-assets/cheeseCut.obj"></a-asset-item>
+                <a-asset-item id="cheese--mtl" src="../assets/burger-assets/cheeseCut.mtl"></a-asset-item>
+                <a-asset-item id="plate--obj" src="../assets/burger-assets/Dish.obj"></a-asset-item>
+                <a-asset-item id="plate--mtl" src="../assets/burger-assets/Dish.mtl"></a-asset-item>
+                <a-asset-item id="breadBottom--obj" src="../assets/burger-assets/Bread_bottom_af.obj"></a-asset-item>
+                <a-asset-item id="breadBottom--mtl" src="../assets/burger-assets/Bread_bottom_af.mtl"></a-asset-item>
+                <a-asset-item id="breadTop--obj" src="../assets/burger-assets/Bread_top.obj"></a-asset-item>
+                <a-asset-item id="breadTop--mtl" src="../assets/burger-assets/Bread_top.mtl"></a-asset-item>
+                <a-asset-item id="tomato--obj" src="../assets/burger-assets/Tomato_af.obj"></a-asset-item>
+                <a-asset-item id="tomato--mtl" src="../assets/burger-assets/Tomato_af.mtl"></a-asset-item>
+                <audio id="grill" src="../assets/burger-assets/Sound/hamburgerGrill.mp3" preload="auto"></audio>
             </a-assets>
+
+            <a-entity sound="src: #grill"></a-entity>
 
             <!-- <a-entity camera look-controls wasd-controls></a-entity> -->
             <a-camera id="js--camera">
@@ -107,9 +122,11 @@
             <!-- Models -->
             <!-- Kitchen elements -->
             <a-entity
-                class="js--placeholder js--interact"
+                id="stove"
+                class="js--placeholder js--interact stove"
                 obj-model="obj: #kitchenStove-o; mtl: #kitchenStove-m"
                 position="0 1 1"
+                soundhandler
             ></a-entity>
             <a-entity 
                 obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
@@ -161,6 +178,63 @@
                 class="js--interact"
                 onclick="checkOrder()"
             ></a-entity>
+
+            <!-- Food models -->
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact burger"
+            scale="0.012 0.012 0.012"
+            obj-model= "obj: #burger--obj; mtl: #burger--mtl"
+            position="-0.689 2.440 -0.237"
+            soundhandler
+            ></a-entity>
+<!-- burger position="-0.689 1.440 -0.237" -->
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact cheese"
+            scale="0.2 0.2 0.2"
+            obj-model= "obj: #cheese--obj; mtl: #cheese--mtl"
+            position="-0.700 1.442 -0.239"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class="js--pickup js--interact burgerbottom"
+            scale="0.022 0.022 0.022"
+            obj-model= "obj: #breadBottom--obj; mtl: #breadBottom--mtl"
+            position="-0.717 1.405 -0.237"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact burgertop"
+            scale="0.02 0.02 0.02"
+            obj-model= "obj: #breadTop--obj; mtl: #breadTop--mtl"
+            position="-0.711 1.477 -0.228"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact tomato"
+            scale="0.03 0.03 0.03"
+            obj-model= "obj: #tomato--obj; mtl: #tomato--mtl"
+            position="-0.701 1.458 -0.239"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact lettuce"
+            scale="0.05 0.05 0.05"
+            obj-model= "obj: #lettuce--obj; mtl: #lettuce--mtl"
+            position="-0.701 1.454 -0.239"
+            ></a-entity>
+
+            <a-entity
+            class="js--placeholder js--interact"
+            obj-model="obj: #plate--obj; mtl: #plate--mtl"
+            position="-0.717 1.419 -0.237"
+            scale="0.9 0.9 0.9"
+        ></a-entity>
         </a-scene>
     </body>
 </html>
