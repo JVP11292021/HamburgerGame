@@ -1,4 +1,5 @@
 const BURGER_CLASS = ".burger";
+const LETTUCE_CLASS = ".lettuce";
 const CHEESE_CLASS = ".cheese";
 const TOMATO_CLASS = ".tomato";
 const BURGER_TOP_CLASS = ".burgertop";
@@ -33,12 +34,14 @@ class OrderSceneComponents {
         burgers,
         cheese,
         tomato,
+        lettuce,
         burgerTop,
         burgerBottom
     ) {
         this.burgers = Array.from(burgers).map(element => ({ key: null, element }));
         this.cheese = Array.from(cheese).map(element => ({ key: null, element }));
         this.tomato = Array.from(tomato).map(element => ({ key: null, element }));
+        this.lettuce = Array.from(lettuce).map(element => ({ key: null, element }));
         this.burgerTop = Array.from(burgerTop).map(element => ({ key: null, element }));
         this.burgerBottom = Array.from(burgerBottom).map(element => ({ key: null, element }));
     }
@@ -47,6 +50,7 @@ class OrderSceneComponents {
         this.burgers.forEach(item => item.key = keyGenerator.generateKey({ min: 1, max: 50 }));
         this.cheese.forEach(item => item.key = keyGenerator.generateKey({ min: 51, max: 100 }));
         this.tomato.forEach(item => item.key = keyGenerator.generateKey({ min: 101, max: 150 }));
+        this.lettuce.forEach(item => item.key = keyGenerator.generateKey({ min: 251, max: 300 }));
         this.burgerTop.forEach(item => item.key = keyGenerator.generateKey({ min: 151, max: 200 }));
         this.burgerBottom.forEach(item => item.key = keyGenerator.generateKey({ min: 201, max: 250 }));
     }
@@ -62,6 +66,7 @@ function loadAssets() {
             let burgerEntities = document.querySelectorAll(BURGER_CLASS);
             let cheeseEntities = document.querySelectorAll(CHEESE_CLASS);
             let tomatoEntities = document.querySelectorAll(TOMATO_CLASS);
+            let lettuceEntities = document.querySelectorAll(LETTUCE_CLASS);
             let burgerTopEntities = document.querySelectorAll(BURGER_TOP_CLASS);
             let burgerBottomEntities = document.querySelectorAll(BURGER_BOTTOM_CLASS);
 
@@ -69,6 +74,7 @@ function loadAssets() {
                 burgerEntities,
                 cheeseEntities,
                 tomatoEntities,
+                lettuceEntities,
                 burgerTopEntities,
                 burgerBottomEntities
             );
@@ -86,6 +92,7 @@ function loadAssets() {
                 Array.from(document.querySelectorAll(BURGER_CLASS)),
                 Array.from(document.querySelectorAll(CHEESE_CLASS)),
                 Array.from(document.querySelectorAll(TOMATO_CLASS)),
+                Array.from(document.querySelectorAll(LETTUCE_CLASS)),
                 Array.from(document.querySelectorAll(BURGER_TOP_CLASS)),
                 Array.from(document.querySelectorAll(BURGER_BOTTOM_CLASS))
             );
