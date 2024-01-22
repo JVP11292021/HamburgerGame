@@ -6,13 +6,12 @@
         <title>A-Frame Model Loading</title>
         <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
         <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
-        <script src="app/teleport.js"></script>
         <script src="app/order.js"></script>
     </head>
     <body>
         <div class="test"></div>
         <div class="test"></div>
-        <a-scene>
+        <a-scene id="js--scene">
             <!-- Asset management -->
             <a-assets>
                 <img id="ground" src="../assets/ground.png">
@@ -26,6 +25,8 @@
                 <a-asset-item id="kitchenSink-m" src="../assets/kitchen-elements/kitchenSink.mtl"></a-asset-item>
                 <a-asset-item id="kitchenCabinetSmall-o" src="../assets/kitchen-elements/kitchenCabinetUpperDouble.obj"></a-asset-item>
                 <a-asset-item id="kitchenCabinetSmall-m" src="../assets/kitchen-elements/kitchenCabinetUpperDouble.mtl"></a-asset-item>
+                <a-asset-item id="burger--obj" src="../assets/burger-assets/Burger.obj"></a-asset-item>
+                <a-asset-item id="burger--mtl" src="../assets/burger-assets/Burger.mtl"></a-asset-item>
             </a-assets>
 
             <!-- <a-entity camera look-controls wasd-controls></a-entity> -->
@@ -38,7 +39,7 @@
                   id="js--cursor"
                   cursor="fuse: true; fuseTimeout: 1000"
                   material="shader: flat"
-                  color="black"
+                  color="green"
                   geometry="primitive: ring; radiusInner: 0.007; radiusOuter: 0.01"
                   position="0 0 -0.5"
                   raycaster="objects: .js--place, .js--interact"
@@ -57,7 +58,6 @@
                             castShadow: true"
                     position="-0.5 1 1"
             ></a-entity>
-            </a-entity>
 
             <!-- Kitchen -->
             <a-plane class="js--pixels js--interact" src="#ground" position="0.5 0.99 0" width="3" height="3" rotation="-90 0 0"></a-plane> <!-- Floor -->
@@ -90,7 +90,8 @@
 
             <!-- Models -->
             <!-- Kitchen elements -->
-            <a-entity 
+            <a-entity
+                class="js--placeholder js--interact"
                 obj-model="obj: #kitchenStove-o; mtl: #kitchenStove-m"
                 position="0 1 1"
             ></a-entity>
@@ -137,6 +138,15 @@
                 rotation="0 -90 0"
             ></a-entity>                                    
             <!-- Utility models -->
+
+            <!-- Food models -->
+            <a-entity
+            id="parentObject" 
+            class="js--pickup js--interact burger"
+            scale="0.01 0.01 0.01"
+            obj-model= "obj: #burger--obj; mtl: #burger--mtl"
+            position="0 2 1"
+            ></a-entity>
 
             <!-- <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity> -->
         </a-scene>
