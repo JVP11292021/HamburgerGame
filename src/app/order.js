@@ -4,10 +4,9 @@ let orderList = [];
 let userList = [];
 
 window.onload = () => {
-    reload();
-
     teleport();
-    pickup();
+    pickupElementsWeb();
+    reload();
 }
 
 function reload() {

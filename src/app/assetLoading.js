@@ -72,6 +72,7 @@ function loadAssets() {
             order.setKeys(keyGenerator);
 
             return {
+                getKeys: () => keyGenerator,
                 get: () => order,
                 set: (newOrderSceneComponents) => order = newOrderSceneComponents,
             };
