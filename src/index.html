@@ -2,39 +2,19 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script>
-    AFRAME.registerComponent('grabber', {
-      init: function () {
-      this.grabbed = null;
-  
-    },
-    events: {
-      gripdown: function(evt) {
-        if (evt.currentTarget.components['raycaster'].intersections.length>0) {
-          this.grabbed = evt.currentTarget.components['raycaster'].intersections[0].object.el;
-          evt.currentTarget.object3D.attach(this.grabbed.object3D);          
-        }
-    }, gripup: function(evt) {
-      if (this.grabbed) {
-        this.el.sceneEl.object3D.attach(this.grabbed.object3D);
-        this.grabbed = null;
-      }
-    }
-  }
-});
-    </script>
+    <script src="main.js"></script>
   </head>
   <body>
     <a-scene>
-      
-      <a-box position="0 1.5 -2" rotation="45 0 45" color="#4CC3D9"></a-box>
-      <a-camera id="camera" position="0 1.5 0"></a-camera>
-      <a-entity id="right-hand"
-              laser-controls="hand: right"
-              oculus-touch-controls="hand: right"
-              raycaster="lineColor: #fff; lineOpacity: 0.7; far: 10"
-              grabber>
+      <a-assets>
+        <a-asset-item id="hamburgertest-obj" src="hamburgertest.obj"></a-asset-item>
+          <a-asset-item id="hamburgertest-mtl" src="hamburgertest.mtl"></a-asset-item>
+      </a-assets>
+      <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc" obb-collider>
       </a-entity>
+      <!-- <a-box id="box" visible="true" obb-collider="minimumColliderDimension: 0.01" color="#00FF00" scale="0.1 0.1 0.1" position="0.3 0.2 0"></a-box> -->
+      <a-obj-model src="#hamburgertest-obj" mtl="#hamburgertest-mtl" id="box" visible="true" obb-collider="minimumColliderDimension: 0.01" scale="0.1 0.1 0.1" position="0.3 0.2 0"></a-obj-model>
+      <a-sky color="#FFFF00"></a-sky>
     </a-scene>
   </body>
 </html>
