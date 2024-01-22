@@ -6,6 +6,7 @@
         <title>A-Frame Model Loading</title>
         <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
         <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+        <script src="./app/main.js"></script>
         <script src="./app/teleport.js"></script>
         <script src="./app/keygenerator.js"></script>
         <script src="./app/assetLoading.js"></script>
@@ -85,17 +86,24 @@
             scale="0.5 0.5 0.5"
             font="kelsonsans"></a-text>
             
-            <a-box class="lettuce"></a-box>
+            <!-- <a-box class="lettuce"></a-box>
             <a-box class="burger"></a-box>
             <a-box class="cheese"></a-box>
             <a-box class="tomato"></a-box>
             <a-box class="burgertop"></a-box>
-            <a-box class="burgerbottom"></a-box>
+            <a-box class="burgerbottom"></a-box> -->
 
 
             <!-- Teleport positions -->
             <a-sphere id="teleportStation" class="js--place" position="-0.1827 1 -0.37453" radius="0.1" color="yellow"></a-sphere>
             <a-sphere id="teleportKitchen" class="js--place" position="-0.12705 1 0.80525" radius="0.1" color="yellow"></a-sphere>
+
+            <!-- VR Hand -->
+            <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc" obb-collider>
+            </a-entity>
+
+            <a-obj-model src="#burger--obj" mtl="#burger--mtl" id="box" visible="true" obb-collider="minimumColliderDimension: 0.01" scale="0.1 0.1 0.1" position="0.3 0.2 0"></a-obj-model>
+
 
             <!-- Models -->
             <!-- Kitchen elements -->
@@ -161,22 +169,4 @@
         </a-scene>
     </body>
 </html>
-<html>
-  <head>
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="main.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <a-assets>
-        <a-asset-item id="hamburgertest-obj" src="hamburgertest.obj"></a-asset-item>
-          <a-asset-item id="hamburgertest-mtl" src="hamburgertest.mtl"></a-asset-item>
-      </a-assets>
-      <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc" obb-collider>
-      </a-entity>
-      <!-- <a-box id="box" visible="true" obb-collider="minimumColliderDimension: 0.01" color="#00FF00" scale="0.1 0.1 0.1" position="0.3 0.2 0"></a-box> -->
-      <a-obj-model src="#hamburgertest-obj" mtl="#hamburgertest-mtl" id="box" visible="true" obb-collider="minimumColliderDimension: 0.01" scale="0.1 0.1 0.1" position="0.3 0.2 0"></a-obj-model>
-      <a-sky color="#FFFF00"></a-sky>
-    </a-scene>
-  </body>
-</html>
+
