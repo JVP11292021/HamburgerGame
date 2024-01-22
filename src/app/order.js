@@ -107,12 +107,16 @@ let assets;
 let orderList = [];
 
 window.onload = () => {
-    assets = loader.load().get();
-    orderList = resolveOrderSceneComponents(assets);
-    console.log(assets);
+    reload();
 
     teleport();
     pickup();
+}
+
+function reload() {
+    assets = loader.load().get();
+    orderList = resolveOrderSceneComponents(assets);
+    console.log(assets);
 }
 
 function resolveOrderSceneComponents(componentList) {
@@ -121,74 +125,69 @@ function resolveOrderSceneComponents(componentList) {
     let burgerAmount = componentList.burgers.length;
     let cheeseAmount = componentList.cheese.length;
     let tomatoAmount = componentList.tomato.length;
+    let lettuceAmount = componentList.lettuce.length;
 
-    if (burgerAmount > 0) 
-        originalList.push("Burger");
+    originalList.push("BurgerTop");
     if (cheeseAmount > 0) 
         originalList.push("Cheese");
     if (tomatoAmount > 0) 
         originalList.push("Tomato");
+    if (lettuceAmount > 0) 
+        originalList.push("Lettuce");
+    if (burgerAmount > 0) 
+        originalList.push("Burger");
+    shuffledList.push("BurgerBottom");
+
 
     if (originalList.length == 0)
         return [];
     return randomizeAndRefactor(originalList);
 }
 
+// For replayability
 function randomizeAndRefactor(list) {
     function rearrange(list) {
         const result = [...list];
         for (let i = result.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [result[i], result[j]] = [result[j], result[i]];
+            const j = Math.floor(Math.random() * (i + 1));
+            [result[i], result[j]] = [result[j], result[i]];
         }
-    
+
         return result;
-      }
-    
-      const rearrangedList = rearrange(list);
-      rearrangedList.unshift("BurgerTop");
-      rearrangedList.push("BurgerBottom");
-    
-      return rearrangedList;
-}
-
-function extractKeysAtIndex(sceneComponents, index) {
-    if (index < 0 || index >= sceneComponents.burgers.length) {
-        console.error('Index out of bounds');
-        return [];
     }
 
-    const keysList = [];
-    for (const component in sceneComponents) {
-        if (sceneComponents.hasOwnProperty(component) && Array.isArray(sceneComponents[component])) {
-        const elementAtIndex = sceneComponents[component][index];
-        if (elementAtIndex) {
-            keysList.push(elementAtIndex.key);
-        }
-        }
-    }
+    const keys = list.map(element => element.toLowerCase());
+    const shuffledKeys = rearrange(keys);
+    const shuffledList = shuffledKeys.map(key => key.charAt(0).toUpperCase() + key.slice(1));
 
-    return keysList;
+    shuffledList.unshift("BurgerTop");
+    shuffledList.push("BurgerBottom");
+
+    return { keys: shuffledKeys, shuffledList };
 }
 
 function compareListEquel(originalList, listToCheck) {
-    const uuidList = listToCheck
-    const orderList = originalList
-    console.log(uuidList);
-    console.log(orderList);
-
-    return false;
+    if (originalList.length !== listToCheck.length) {
+        return false;
+    }
+    for (let i = 0; i < originalList.length; i++) {
+        if (originalList[i] !== listToCheck[i]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 function checkOrder() {
     let correctFlag = false;
     
-    correctFlag = compareListEquel(orderList, extractKeysAtIndex(assets, 0));
+    correctFlag = compareListEquel(orderList, orderList);
     if (correctFlag){
-
+        alert("The order is correct");
+        location.reload();
     }
     else {
-        // alert("The order is incorrect");
-        // location.reload();
+        alert("The order is incorrect");
+        reload();
     }
 }
