@@ -1,19 +1,23 @@
 
 let assets;
 let orderList = [];
-let userList = [];
 
 window.onload = () => {
+    assets = loader.load().get();
+    keyGenerator = loader.getKeys();
+    orderList = resolveOrderSceneComponents(assets);
+
     teleport();
-    pickupElementsWeb();
-    reload();
+    pickupElementsWeb(assets, keyGenerator);
 }
 
 function reload() {
     assets = loader.load().get();
-    userList = assets.items;
+    keyGenerator = loader.getKeys();
     orderList = resolveOrderSceneComponents(assets);
-    console.log(assets);
+
+    teleport();
+    pickupElementsWeb(assets, keyGenerator);
 }
 
 function resolveOrderSceneComponents(componentList) {
@@ -77,8 +81,8 @@ function compareListEquel(originalList, listToCheck) {
 
 function checkOrder() {
     let correctFlag = false;
-    
-    correctFlag = compareListEquel(orderList, userList);
+    correctFlag = compareListEquel(orderList, assets.refactorItems());
+    console.log(assets.items);
     if (correctFlag){
         alert("The order is correct");
         location.reload();
@@ -86,5 +90,6 @@ function checkOrder() {
     else {
         alert("The order is incorrect");
         reload();
+        location.reload();
     }
 }
