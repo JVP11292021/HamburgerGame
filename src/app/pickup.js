@@ -27,6 +27,8 @@ function pickup () {
 
     addListeners();
 
+    var sound = document.querySelector('[sound]');
+
     for (let i = 0; i < placeholders.length; i++) {
         placeholders[i].addEventListener('click', function(evt){
           if (hold == "box"){
@@ -36,6 +38,12 @@ function pickup () {
             cloneObject.setAttribute('id', "free");
             scene.appendChild(cloneObject);
             originalObject.parentNode.removeChild(originalObject);
+
+            // cloneObject.dispatchEvent(new Event('element-moved'));
+            console.log('element moved');
+            
+            sound.components.sound.playSound();
+
             addListeners();
             hold = null;
           }

@@ -10,24 +10,27 @@
         <script src="app/order.js"></script>
         <script src="app/teleport.js"></script>
         <script>
-            AFRAME.registerComponent('soundhandler', {
-                init: function () {
-                // Reference to the sound
-                var sound = document.querySelector('[sound]');
+//             AFRAME.registerComponent('soundhandler', {
+//                 init: function () {
+//                     console.log('soundhandler component initialized');
+//                 // Reference to the sound
+//                 var sound = document.querySelector('[sound]');
 
-                // // Reference to this entity
-                var entity = this.el;   
+//                 // // Reference to this entity
+//                 var burger = document.getElementsByClassName('burger');   
 
-                // Event listener for collision
-                this.el.addEventListener('click', function (Event) {
-                    if (event.detail.body.el.id === 'stove' || 
-                        event.detail.target.el.class === 'burger') {
-                        sound.components.sound.playSound();
-                        console.log("ik speel af")
-                    }
-        }); 
-    }
-}); 
+//                 // Event listener for collision
+//                 this.el.addEventListener('element-moved', function (event) {
+//                     console.log("ik speel nu af");
+//                     if (burger[0].getAttributeburger.getAttribute('position').x === -0.122 &&
+//                         burger.getAttribute('position').y === 1.418 &&
+//                         burger.getAttribute('position').z === 1.317 ){
+//                         sound.components.sound.playSound();
+//                         console.log("ik speel af")
+//                     }
+//         }); 
+//     }
+// }); 
         </script>
         <!-- <script src="app/sound.js"></script> -->
     </head>
@@ -65,7 +68,7 @@
                 <audio id="grill" src="../assets/burger-assets/Sound/hamburgerGrill.mp3" preload="auto"></audio>
             </a-assets>
 
-            <a-entity sound="src: #grill"></a-entity>
+            <a-entity sound="src: #grill; volume: 15"></a-entity>
 
             <!-- <a-entity camera look-controls wasd-controls></a-entity> -->
             <a-camera id="js--camera">
@@ -105,7 +108,7 @@
             <a-plane class="js--pixels js--interact" position="-1 1.73 0" width="3" height="1.5" rotation="-180 -90 0" color="black"></a-plane> <!-- Left Side wall -->
             <a-plane class="js--pixels js--interact" position="0.5 2.45 0" width="3" height="3" rotation="-270 0 0" color="gray"></a-plane> <!-- Floor -->
             
-            <a-box class="burger"></a-box>
+            <!-- <a-box class="burger"></a-box>
             <a-box class="burger"></a-box>
             <a-box class="burger"></a-box>
             <a-box class="lettuce"></a-box>
@@ -119,7 +122,7 @@
             <a-box class="burgertop"></a-box>
             <a-box class="burgerbottom"></a-box>
             <a-box class="burgerbottom"></a-box>
-            <a-box class="burgerbottom"></a-box>
+            <a-box class="burgerbottom"></a-box> -->
 
 
             <!-- Teleport positions -->
