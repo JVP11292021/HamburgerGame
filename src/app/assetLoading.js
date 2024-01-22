@@ -15,6 +15,7 @@ class OrderSceneComponents {
         burgerBottom
     ) {
         this.items = [];
+        this.items.push("BurgerTop");
         this.burgers = Array.from(burgers).map(element => ({ key: null, element }));
         this.cheese = Array.from(cheese).map(element => ({ key: null, element }));
         this.tomato = Array.from(tomato).map(element => ({ key: null, element }));
@@ -33,7 +34,6 @@ class OrderSceneComponents {
     }
 
     setItem(key) {
-        this.items.push("BurgerTop");
         if (key > 0 && key < 51)
             this.items.push("Burger");
         if (key > 50 && key < 101)
@@ -42,7 +42,11 @@ class OrderSceneComponents {
             this.items.push("Tomato");
         if (key > 250 && key < 301)
             this.items.push("Lettuce");
-        this.items.push("BurgerBottom")
+    }
+
+    refactorItems() {
+        this.items.push("BurgerBottom");
+        return this.items;
     }
 }
 
@@ -89,6 +93,7 @@ function loadAssets() {
             );
         },
         get: () => order,
+        getKeys: () => keyGenerator,
     };
 }
 
