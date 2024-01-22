@@ -1,5 +1,5 @@
-window.onload = () => {
-  
+function teleport() {
+    
     const places = document.getElementsByClassName("js--place");
     const camera = document.getElementById("js--camera");
     const cursor = document.getElementById("js--cursor");
