@@ -1,25 +1,25 @@
 const BURGER_CLASS = ".burger";
-const LETTUCE_CLASS = ".lettuce";
+const CHEESE_CLASS = ".cheese";
 const TOMATO_CLASS = ".tomato";
 const BURGER_TOP_CLASS = ".burgertop";
 const BURGER_BOTTOM_CLASS = ".burgerbottom";
 
 class OrderSceneComponents {
     burgers;
-    lettuce;
+    cheese;
     tomato;
     burgerTop;
     burgerBottom;
 
     constructor(
         burgers,
-        lettuce,
+        cheese,
         tomato,
         burgerTop,
         burgerBottom
     ) {
         this.burgers = burgers;
-        this.lettuce = lettuce;
+        this.cheese = cheese;
         this.tomato = tomato;
         this.burgerTop = burgerTop;
         this.burgerBottom = burgerBottom;
@@ -32,14 +32,14 @@ function loadAssets() {
     return {
         load: () => {
             let burgerEntities = document.querySelectorAll(BURGER_CLASS);
-            let lettuceEntities = document.querySelectorAll(LETTUCE_CLASS);
+            let cheeseEntities = document.querySelectorAll(CHEESE_CLASS);
             let tomatoEntities = document.querySelectorAll(TOMATO_CLASS);
             let burgerTopEntities = document.querySelectorAll(BURGER_TOP_CLASS);
             let burgerBottomEntities = document.querySelectorAll(BURGER_BOTTOM_CLASS);
         
             order = new OrderSceneComponents(
                 burgerEntities,
-                lettuceEntities,
+                cheeseEntities,
                 tomatoEntities,
                 burgerTopEntities,
                 burgerBottomEntities);
@@ -51,7 +51,7 @@ function loadAssets() {
         },
         reload: () => order = new OrderSceneComponents(
                 document.querySelectorAll(BURGER_CLASS),
-                document.querySelectorAll(LETTUCE_CLASS),
+                document.querySelectorAll(CHEESE_CLASS),
                 document.querySelectorAll(TOMATO_CLASS),
                 document.querySelectorAll(BURGER_TOP_CLASS),
                 document.querySelectorAll(BURGER_BOTTOM_CLASS)),
@@ -60,13 +60,15 @@ function loadAssets() {
     }
 }
 
+const loader = loadAssets();
+
 let assets = new OrderSceneComponents();
 let orderList = [];
 
 window.onload = () => {
-    assets = loadAssets().load().get();
+    assets = loader.load().get();
     orderList = resolveOrderSceneComponents(assets);
-
+    console.log(assets);
     teleport();
 }
 
@@ -74,13 +76,13 @@ function resolveOrderSceneComponents(componentList) {
     const originalList = [];
 
     let burgerAmount = componentList.burgers.length;
-    let lettuceAmount = componentList.lettuce.length;
+    let cheeseAmount = componentList.cheese.length;
     let tomatoAmount = componentList.tomato.length;
     
     if (burgerAmount > 0) 
         originalList.push("Burger");
-    if (lettuceAmount > 0) 
-        originalList.push("Lettuce");
+    if (cheeseAmount > 0) 
+        originalList.push("cheese");
     if (tomatoAmount > 0) 
         originalList.push("Tomato");
 
@@ -111,5 +113,14 @@ function randomizeAndRefactor(list) {
 }
 
 function checkOrder() {
-    alert("Working")
+    let correctFlag = false;
+    
+
+    if (correctFlag){
+
+    }
+    else {
+        alert("The order is incorrect");
+        location.reload();
+    }
 }
