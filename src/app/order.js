@@ -28,10 +28,10 @@ class Order {
 
 function loadAssets() {
     let burgerEntities = document.querySelectorAll(BURGER_CLASS);
-    let lettuceEntities = document.querySelectorAll(BURGER_CLASS);
-    let tomatoEntities = document.querySelectorAll(BURGER_CLASS);
-    let burgerTopEntities = document.querySelectorAll(BURGER_CLASS);
-    let burgerBottomEntities = document.querySelectorAll(BURGER_CLASS);
+    let lettuceEntities = document.querySelectorAll(LETTUCE_CLASS);
+    let tomatoEntities = document.querySelectorAll(TOMATO_CLASS);
+    let burgerTopEntities = document.querySelectorAll(BURGER_TOP_CLASS);
+    let burgerBottomEntities = document.querySelectorAll(BURGER_BOTTOM_CLASS);
 
     let order = new Order(
         burgerEntities,
@@ -46,8 +46,8 @@ function loadAssets() {
     }
 }
 
+console.log()
 window.onload = () => {
-    console.log(loadAssets().get());
 }
 
 function resolveOrder(componentList) {
