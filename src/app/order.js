@@ -129,9 +129,7 @@ function resolveOrderSceneComponents(componentList) {
 
 function randomizeAndRefactor(list) {
     function rearrange(list) {
-        const result = [...list]; // Create a new array to avoid modifying the original array
-    
-        // Rearrange the list with randomness
+        const result = [...list];
         for (let i = result.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [result[i], result[j]] = [result[j], result[i]];
