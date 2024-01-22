@@ -9,6 +9,27 @@
         <script src="app/pickup.js"></script>
         <script src="app/order.js"></script>
         <script src="app/teleport.js"></script>
+        <script>
+            AFRAME.registerComponent('soundhandler', {
+                init: function () {
+                // Reference to the sound
+                var sound = document.querySelector('[sound]');
+
+                // // Reference to this entity
+                var entity = this.el;   
+
+                // Event listener for collision
+                this.el.addEventListener('click', function (Event) {
+                    if (event.detail.body.el.id === 'stove' || 
+                        event.detail.target.el.class === 'burger') {
+                        sound.components.sound.playSound();
+                        console.log("ik speel af")
+                    }
+        }); 
+    }
+}); 
+        </script>
+        <!-- <script src="app/sound.js"></script> -->
     </head>
     <body>
         <div class="test"></div>
@@ -41,7 +62,10 @@
                 <a-asset-item id="breadTop--mtl" src="../assets/burger-assets/Bread_top.mtl"></a-asset-item>
                 <a-asset-item id="tomato--obj" src="../assets/burger-assets/Tomato_af.obj"></a-asset-item>
                 <a-asset-item id="tomato--mtl" src="../assets/burger-assets/Tomato_af.mtl"></a-asset-item>
+                <audio id="grill" src="../assets/burger-assets/Sound/hamburgerGrill.mp3" preload="auto"></audio>
             </a-assets>
+
+            <a-entity sound="src: #grill"></a-entity>
 
             <!-- <a-entity camera look-controls wasd-controls></a-entity> -->
             <a-camera id="js--camera">
@@ -105,9 +129,11 @@
             <!-- Models -->
             <!-- Kitchen elements -->
             <a-entity
-                class="js--placeholder js--interact"
+                id="stove"
+                class="js--placeholder js--interact stove"
                 obj-model="obj: #kitchenStove-o; mtl: #kitchenStove-m"
                 position="0 1 1"
+                soundhandler
             ></a-entity>
             <a-entity 
                 obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
@@ -159,9 +185,10 @@
             class=" js--pickup js--interact burger"
             scale="0.012 0.012 0.012"
             obj-model= "obj: #burger--obj; mtl: #burger--mtl"
-            position="-0.689 1.440 -0.237"
+            position="-0.689 2.440 -0.237"
+            soundhandler
             ></a-entity>
-
+<!-- burger position="-0.689 1.440 -0.237" -->
             <a-entity
             id="parentObject" 
             class=" js--pickup js--interact cheese"
