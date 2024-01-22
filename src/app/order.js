@@ -1,8 +1,8 @@
 const BURGER_CLASS = ".burger";
 const LETTUCE_CLASS = ".lettuce";
 const TOMATO_CLASS = ".tomato";
-const BURGER_TOP_CLASS = ".burger.top";
-const BURGER_BOTTOM_CLASS = ".burger.bottom";
+const BURGER_TOP_CLASS = ".burgertop";
+const BURGER_BOTTOM_CLASS = ".burgerbottom";
 
 class Order {
     burgers;
@@ -27,27 +27,42 @@ class Order {
 }
 
 function loadAssets() {
-    let burgerEntities = document.querySelectorAll(BURGER_CLASS);
-    let lettuceEntities = document.querySelectorAll(LETTUCE_CLASS);
-    let tomatoEntities = document.querySelectorAll(TOMATO_CLASS);
-    let burgerTopEntities = document.querySelectorAll(BURGER_TOP_CLASS);
-    let burgerBottomEntities = document.querySelectorAll(BURGER_BOTTOM_CLASS);
-
-    let order = new Order(
-        burgerEntities,
-        lettuceEntities,
-        tomatoEntities,
-        burgerTopEntities,
-        burgerBottomEntities);
+    let order = new Order();
 
     return {
-        get: () => order,
-        set: (newOrder) => order = newOrder
+        load: () => {
+            let burgerEntities = document.querySelectorAll(BURGER_CLASS);
+            let lettuceEntities = document.querySelectorAll(LETTUCE_CLASS);
+            let tomatoEntities = document.querySelectorAll(TOMATO_CLASS);
+            let burgerTopEntities = document.querySelectorAll(BURGER_TOP_CLASS);
+            let burgerBottomEntities = document.querySelectorAll(BURGER_BOTTOM_CLASS);
+        
+            order = new Order(
+                burgerEntities,
+                lettuceEntities,
+                tomatoEntities,
+                burgerTopEntities,
+                burgerBottomEntities);
+
+            return {
+                get: () => order,
+                set: (newOrder) => order = newOrder,
+            }
+        },
+        reload: () => order = new Order(
+                document.querySelectorAll(BURGER_CLASS),
+                document.querySelectorAll(LETTUCE_CLASS),
+                document.querySelectorAll(TOMATO_CLASS),
+                document.querySelectorAll(BURGER_TOP_CLASS),
+                document.querySelectorAll(BURGER_BOTTOM_CLASS)),
+        get: () => order
+        
     }
 }
 
-console.log()
 window.onload = () => {
+    const assets = loadAssets().load().get();
+    const orderList = resolveOrder(assets);
 }
 
 function resolveOrder(componentList) {
