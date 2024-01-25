@@ -15,7 +15,6 @@ class OrderSceneComponents {
         burgerBottom
     ) {
         this.items = [];
-        this.items.push("BurgerTop");
         this.burgers = Array.from(burgers).map(element => ({ key: null, element }));
         this.cheese = Array.from(cheese).map(element => ({ key: null, element }));
         this.tomato = Array.from(tomato).map(element => ({ key: null, element }));
@@ -42,11 +41,10 @@ class OrderSceneComponents {
             this.items.push("Tomato");
         if (key > 250 && key < 301)
             this.items.push("Lettuce");
-    }
-
-    refactorItems() {
-        this.items.push("BurgerBottom");
-        return this.items;
+        if (key > 150 && key < 201)
+            this.items.push("BurgerTop");
+        if (key > 200 && key < 251)
+            this.items.push("BurgerBottom");
     }
 }
 

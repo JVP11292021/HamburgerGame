@@ -81,7 +81,7 @@ function compareListEquel(originalList, listToCheck) {
 
 function checkOrder() {
     let correctFlag = false;
-    correctFlag = compareListEquel(orderList, assets.refactorItems());
+    correctFlag = compareListEquel(orderList, assets.items);
     console.log(assets.items);
     if (correctFlag){
         alert("The order is correct");
