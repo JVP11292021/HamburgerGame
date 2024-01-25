@@ -1,20 +1,243 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="main.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <a-assets>
-        <a-asset-item id="hamburgertest-obj" src="hamburgertest.obj"></a-asset-item>
-          <a-asset-item id="hamburgertest-mtl" src="hamburgertest.mtl"></a-asset-item>
-      </a-assets>
-      <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc" obb-collider>
-      </a-entity>
-      <!-- <a-box id="box" visible="true" obb-collider="minimumColliderDimension: 0.01" color="#00FF00" scale="0.1 0.1 0.1" position="0.3 0.2 0"></a-box> -->
-      <a-obj-model src="#hamburgertest-obj" mtl="#hamburgertest-mtl" id="box" visible="true" obb-collider="minimumColliderDimension: 0.01" scale="0.1 0.1 0.1" position="0.3 0.2 0"></a-obj-model>
-      <a-sky color="#FFFF00"></a-sky>
-    </a-scene>
-  </body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>A-Frame Model Loading</title>
+        <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+        <script src="main.js"></script>
+        <script src="./app/teleport.js"></script>
+        <script src="./app/keygenerator.js"></script>
+        <script src="./app/assetLoading.js"></script>
+        <script src="./app/pickup.js"></script>
+        <script src="./app/order.js"></script>
+    </head>
+    <body>
+
+        <a-scene id="js--scene">
+            <!-- Asset management -->
+            <a-assets>
+                <img id="ground" src="ground.png">
+                <a-asset-item id="fridge-o" src="kitchen-elements/kitchenFridge.obj"></a-asset-item>
+                <a-asset-item id="fridge-m" src="kitchen-elements/kitchenFridge.mtl"></a-asset-item>
+                <a-asset-item id="kitchenStove-o" src="kitchen-elements/kitchenStoveElectric.obj"></a-asset-item>
+                <a-asset-item id="kitchenStove-m" src="kitchen-elements/kitchenStoveElectric.mtl"></a-asset-item>
+                <a-asset-item id="kitchenCabinet-o" src="kitchen-elements/kitchenCabinet.obj"></a-asset-item>
+                <a-asset-item id="kitchenCabinet-m" src="kitchen-elements/kitchenCabinet.mtl"></a-asset-item>
+                <a-asset-item id="kitchenSink-o" src="kitchen-elements/kitchenSink.obj"></a-asset-item>
+                <a-asset-item id="kitchenSink-m" src="kitchen-elements/kitchenSink.mtl"></a-asset-item>
+                <a-asset-item id="kitchenCabinetSmall-o" src="kitchen-elements/kitchenCabinetUpperDouble.obj"></a-asset-item>
+                <a-asset-item id="kitchenCabinetSmall-m" src="kitchen-elements/kitchenCabinetUpperDouble.mtl"></a-asset-item>
+                <a-asset-item id="bell-o" src="kitchen-elements/Bell.obj"></a-asset-item>
+                <a-asset-item id="bell-m" src="kitchen-elements/Bell.mtl"></a-asset-item>
+                <a-asset-item id="burger--obj" src="burger-assets/Burger.obj"></a-asset-item>
+                <a-asset-item id="burger--mtl" src="burger-assets/Burger.mtl"></a-asset-item>
+                <a-asset-item id="burger--obj" src="burger-assets/Burger.obj"></a-asset-item>
+                <a-asset-item id="burger--mtl" src="burger-assets/Burger.mtl"></a-asset-item>
+                <a-asset-item id="lettuce--obj" src="burger-assets/Lettuce.obj"></a-asset-item>
+                <a-asset-item id="lettuce--mtl" src="burger-assets/Lettuce.mtl"></a-asset-item>
+                <a-asset-item id="cheese--obj" src="burger-assets/cheeseCut.obj"></a-asset-item>
+                <a-asset-item id="cheese--mtl" src="burger-assets/cheeseCut.mtl"></a-asset-item>
+                <a-asset-item id="plate--obj" src="burger-assets/Dish.obj"></a-asset-item>
+                <a-asset-item id="plate--mtl" src="burger-assets/Dish.mtl"></a-asset-item>
+                <a-asset-item id="breadBottom--obj" src="burger-assets/Bread_bottom_af.obj"></a-asset-item>
+                <a-asset-item id="breadBottom--mtl" src="burger-assets/Bread_bottom_af.mtl"></a-asset-item>
+                <a-asset-item id="breadTop--obj" src="burger-assets/Bread_top.obj"></a-asset-item>
+                <a-asset-item id="breadTop--mtl" src="burger-assets/Bread_top.mtl"></a-asset-item>
+                <a-asset-item id="tomato--obj" src="burger-assets/Tomato_af.obj"></a-asset-item>
+                <a-asset-item id="tomato--mtl" src="burger-assets/Tomato_af.mtl"></a-asset-item>
+                <audio id="grill" src="burger-assets/Sound/hamburgerGrill.mp3" preload="auto"></audio>
+            </a-assets>
+
+            <a-entity sound="src: #grill"></a-entity>
+
+            <!-- <a-entity camera look-controls wasd-controls></a-entity> -->
+            <a-camera id="js--camera">
+                <!-- Cursor -->
+                <a-cursor 
+                  animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 100; from: 0.1 0.1 0.1; to: 1 1 1"
+                  animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1000; from: 1 1 1; to: 0.1 0.1 0.1"
+                  animation="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+                  id="js--cursor"
+                  cursor="fuse: true; fuseTimeout: 1000"
+                  material="shader: flat"
+                  color="white"
+                  geometry="primitive: ring; radiusInner: 0.007; radiusOuter: 0.01"
+                  position="0 0 -0.5"
+                  raycaster="objects: .js--place, .js--interact"
+                ></a-cursor>
+            </a-camera>
+
+            <!-- Lighting -->
+            <a-entity light="type: ambient;
+                            intensity: 0.2;"
+            ></a-entity>
+            <a-entity light="type: point; intensity: 0.8; distance: 10; castShadow: true">
+            </a-entity>
+            <a-entity light="type: directional;
+                            color: #FFFFFF;
+                            intensity: 0.6;
+                            castShadow: true"
+                    position="-0.5 1 1"
+            ></a-entity>
+
+            <!-- Kitchen -->
+            <a-plane class="js--pixels js--interact" src="#ground" position="0.5 0.99 0" width="3" height="3" rotation="-90 0 0"></a-plane> <!-- Floor -->
+            <a-plane class="js--pixels js--interact" position="0.5 1.73 -1.5" width="3" height="1.5" rotation="0 0 0" color="black"></a-plane> <!-- Front wall -->
+            <a-plane class="js--pixels js--interact" position="2 1.73 0" width="3" height="1.5" rotation="0 -90 0" color="black"></a-plane> <!-- Right Side wall -->
+            <a-plane class="js--pixels js--interact" position="0.5 1.73 1.5" width="3" height="1.5" rotation="-180 0 0" color="black"></a-plane> <!-- Back wall -->
+            <a-plane class="js--pixels js--interact" position="-1 1.73 0" width="3" height="1.5" rotation="-180 -90 0" color="black"></a-plane> <!-- Left Side wall -->
+            <a-plane class="js--pixels js--interact" position="0.5 2.45 0" width="3" height="3" rotation="-270 0 0" color="gray"></a-plane> <!-- Floor -->
+            
+
+             <!-- A-text entity to display text -->
+            <a-text 
+            value="Make me a burger with: 
+            - 1x Cheese
+            - 1x Tomato
+            - 1x Lettuce
+            - 1x Burger"
+            position="0.69611 1.85449 -1.50004" 
+            color="white" align="center" 
+            scale="0.5 0.5 0.5"
+            font="kelsonsans"></a-text>
+            
+            <!-- <a-box class="lettuce"></a-box>
+            <a-box class="burger"></a-box>
+            <a-box class="cheese"></a-box>
+            <a-box class="tomato"></a-box>
+            <a-box class="burgertop"></a-box>
+            <a-box class="burgerbottom"></a-box> -->
+
+
+            <!-- Teleport positions -->
+            <a-sphere id="teleportStation" class="js--place" position="-0.1827 1 -0.37453" radius="0.1" color="yellow"></a-sphere>
+            <a-sphere id="teleportKitchen" class="js--place" position="-0.12705 1 0.80525" radius="0.1" color="yellow"></a-sphere>
+
+            <!-- VR Hand -->
+            <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc" obb-collider>
+            </a-entity>
+
+            <a-obj-model src="#burger--obj" mtl="#burger--mtl" id="box" visible="true" obb-collider="minimumColliderDimension: 0.01" scale="0.1 0.1 0.1" position="0.3 0.2 0"></a-obj-model>
+
+
+            <!-- Models -->
+            <!-- Kitchen elements -->
+            <a-entity
+                id="stove"
+                class="js--placeholder js--interact stove"
+                obj-model="obj: #kitchenStove-o; mtl: #kitchenStove-m"
+                position="0 1 1"
+                soundhandler
+            ></a-entity>
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="0.4 1 1"
+            ></a-entity>
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="0.8 1 1"
+            ></a-entity>
+            <a-entity 
+                obj-model="obj: #kitchenSink-o; mtl: #kitchenSink-m"
+                position="1.2 1 1"
+            ></a-entity>
+
+            <!-- Cabinets -->
+            <a-entity 
+                obj-model="obj: #kitchenCabinetSmall-o; mtl: #kitchenCabinetSmall-m"
+                position="1.2 1.7 1"
+            ></a-entity>
+            <a-entity 
+                obj-model="obj: #kitchenCabinetSmall-o; mtl: #kitchenCabinetSmall-m"
+                position="0.8 1.7 1"
+            ></a-entity>
+            <a-entity 
+                obj-model="obj: #fridge-o; mtl: #fridge-m"
+                position="1.7 1 1"
+            ></a-entity>          
+
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="-0.5 1 -0.4"
+                rotation="0 -90 0"
+            ></a-entity>  
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="-0.5 1 0"
+                rotation="0 -90 0"
+            ></a-entity>  
+            <a-entity 
+                obj-model="obj: #kitchenCabinet-o; mtl: #kitchenCabinet-m"
+                position="-0.5 1 0.4"
+                rotation="0 -90 0"
+            ></a-entity>                                    
+            <!-- Utility models -->
+            <a-entity 
+                obj-model="obj: #bell-o; mtl: #bell-m" 
+                position="-0.733 1.463 -0.655"
+                rotation="0 0 0" 
+                class="js--interact"
+                onclick="checkOrder()"
+            ></a-entity>
+
+            <!-- Food models -->
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact burger"
+            scale="0.012 0.012 0.012"
+            obj-model= "obj: #burger--obj; mtl: #burger--mtl"
+            position="-0.689 2.440 -0.237"
+            soundhandler
+            ></a-entity>
+<!-- burger position="-0.689 1.440 -0.237" -->
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact cheese"
+            scale="0.2 0.2 0.2"
+            obj-model= "obj: #cheese--obj; mtl: #cheese--mtl"
+            position="-0.700 1.442 -0.239"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class="js--pickup js--interact burgerbottom"
+            scale="0.022 0.022 0.022"
+            obj-model= "obj: #breadBottom--obj; mtl: #breadBottom--mtl"
+            position="-0.717 1.405 -0.237"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact burgertop"
+            scale="0.02 0.02 0.02"
+            obj-model= "obj: #breadTop--obj; mtl: #breadTop--mtl"
+            position="-0.711 1.477 -0.228"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact tomato"
+            scale="0.03 0.03 0.03"
+            obj-model= "obj: #tomato--obj; mtl: #tomato--mtl"
+            position="-0.701 1.458 -0.239"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact lettuce"
+            scale="0.05 0.05 0.05"
+            obj-model= "obj: #lettuce--obj; mtl: #lettuce--mtl"
+            position="-0.701 1.454 -0.239"
+            ></a-entity>
+
+            <a-entity
+            class="js--placeholder js--interact"
+            obj-model="obj: #plate--obj; mtl: #plate--mtl"
+            position="-0.717 1.419 -0.237"
+            scale="0.9 0.9 0.9"
+        ></a-entity>
+        </a-scene>
+    </body>
 </html>
+
