@@ -41,8 +41,9 @@ function pickup () {
 
             // cloneObject.dispatchEvent(new Event('element-moved'));
             console.log('element moved');
-            
+
             sound.components.sound.playSound();
+            console.log("IK SPEEL NU AF")
 
             addListeners();
             hold = null;
