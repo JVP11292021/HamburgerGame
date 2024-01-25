@@ -9,6 +9,7 @@ window.onload = () => {
 
     teleport();
     pickupElementsWeb(assets, keyGenerator);
+      
 }
 
 function reload() {

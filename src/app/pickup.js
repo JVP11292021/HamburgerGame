@@ -1,3 +1,4 @@
+
 function pickupElementsWeb(assets, keyGenerator) {
   const camera = document.getElementById('js--camera');
   let hold = null;
@@ -40,7 +41,7 @@ function pickupElementsWeb(assets, keyGenerator) {
           cloneObject.setAttribute('id', "js--hold");
           camera.appendChild(cloneObject);
           hold = "box"
-          this.remove();
+          this.remove();// Error
         }
       });
     }
@@ -69,7 +70,7 @@ function pickupElementsWeb(assets, keyGenerator) {
   
         cloneObject.setAttribute('id', "free");
         scene.appendChild(cloneObject);
-        originalObject.parentNode.removeChild(originalObject);
+        originalObject.parentNode.removeChild(originalObject); // error
         addListeners();
         hold = null;
       }

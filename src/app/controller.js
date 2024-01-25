@@ -40,8 +40,8 @@ function release() {
 const main = () => {
     let objectList = document.getElementsByClassName("js--interact")
     let hand = document.getElementById("rightHand");
-    let stovecol = document.getElementById("col-stove")
-    let platecol = document.getElementById("col-plate")
+    let stovecol = document.getElementById("stove")
+    let platecol = document.getElementById("plate")
 
     for (let i = 0; i < objectList.length; i++) {
         const object = objectList[i];
@@ -82,8 +82,9 @@ const main = () => {
     platecol.addEventListener("obbcollisionstarted", function () {
         if (!gripDown) {
             //Nu zet hij het ingrediënt de position op de position van het bord en rotation naar 0 0 0 (zodat die horizontaal is)
-            interactedObject.setAttribute("position", platecol.getAttribute("position"))
+            interactedObject.setAttribute("position", { x: placeholderPosition.x, y: placeholderPosition.y + stackHeight, z: placeholderPosition.z })
             interactedObject.setAttribute("rotation", "0 0 0")
+            stackHeight += 0.03;
         }
     });
     hand.addEventListener("gripup", function () {
