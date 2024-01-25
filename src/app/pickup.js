@@ -101,7 +101,6 @@ function pickupElementsWeb(assets, keyGenerator) {
             scene.appendChild(cloneObject);
             originalObject.parentNode.removeChild(originalObject);
 
-            // cloneObject.dispatchEvent(new Event('element-moved'));
             console.log('element moved');
 
             sound.components.sound.playSound();
