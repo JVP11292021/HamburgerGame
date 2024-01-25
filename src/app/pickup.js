@@ -4,15 +4,7 @@ function pickupElementsWeb(assets, keyGenerator) {
   let stackHeight = 0;
   const placeholders = document.getElementsByClassName('js--placeholder');
   let scene = document.getElementById('js--scene');
-
-  function checkCollision(objectA, objectB) {
-    const positionA = objectA.getAttribute('position');
-    const positionB = objectB.getAttribute('position');
-
-    const distance = positionA.distanceTo(positionB);
-
-    return distance < 0.1; // You can adjust the threshold based on your scene
-  }
+  var sound = document.querySelector('[sound]');
 
   function checkAttribute(pickupElement) {
     const classNamesToCheck = ['burger', 'lettuce', 'tomato', 'burgerTop', 'burgerBottom', 'cheese'];
@@ -66,7 +58,7 @@ function pickupElementsWeb(assets, keyGenerator) {
         cloneObject.setAttribute('id', "free");
         scene.appendChild(cloneObject);
         originalObject.parentNode.removeChild(originalObject);
-        // sound.components.sound.playSound();
+        sound.components.sound.playSound();
         addListeners();
         hold = null;
       }
@@ -91,106 +83,5 @@ function pickupElementsWeb(assets, keyGenerator) {
       handleObjectPlacement(this);
     });
   }
-
-  // addListeners();
-
-  // let stackHeight = 0;
-
-  // for (let i = 0; i < placeholders.length; i++) {
-  //     placeholders[i].addEventListener('click', function(evt){
-  //         if (hold == "box"){
-  //             var originalObject = document.getElementById('js--hold');
-  //             console.log(originalObject)
-  //             var cloneObject = originalObject.cloneNode(true);
-  //             console.log(cloneObject);
-  //             const placeholderPosition = this.getAttribute('position');
-  //             console.log(placeholderPosition);
-  //             cloneObject.setAttribute("position", { x: placeholderPosition.x, y: placeholderPosition.y + stackHeight, z: placeholderPosition.z });
-  //             stackHeight += 0.03; 
-              
-  //             cloneObject.setAttribute('id', "free");
-  //             scene.appendChild(cloneObject);
-  //             originalObject.parentNode.removeChild(originalObject);
-  //             addListeners();
-  //             hold = null;
-  //         }
-  //       });
-  //     }
-
-  //   for (let i = 0; i < placeholders.length; i++) {
-  //       placeholders[i].addEventListener('click', function(evt){
-  //         if (hold == "box"){
-  //           var originalObject = document.getElementById('js--hold');
-  //           var cloneObject = originalObject.cloneNode(true);
-  //           cloneObject.setAttribute("position",{x: '-0.122', y: '1.418', z: '1.317'});
-  //           cloneObject.setAttribute('id', "free");
-  //           scene.appendChild(cloneObject);
-  //           originalObject.parentNode.removeChild(originalObject);
-
-  //           console.log('element moved');
-
-  //           sound.components.sound.playSound();
-  //           console.log("IK SPEEL NU AF")
-
-  //           addListeners();
-  //           hold = null;
-  //         }
-  //     });
-  // }
-
-
-  // for (let i = 0; i < placeholders.length; i++) {
-  //   placeholders[i].addEventListener('click', function(evt){
-  //     if (hold == "box"){
-  //       var originalObject = document.getElementById('js--hold');
-  //       var cloneObject = originalObject.cloneNode(true);
-  //       cloneObject.setAttribute("position",{x: '-0.122', y: '1.418', z: '1.317'});
-  //       cloneObject.setAttribute('id', "free");
-  //       scene.appendChild(cloneObject);
-  //       originalObject.parentNode.removeChild(originalObject);
-
-  //       // cloneObject.dispatchEvent(new Event('element-moved'));
-  //       console.log('element moved');
-
-  //       sound.components.sound.playSound();
-  //       console.log("IK SPEEL NU AF")
-
-  //       addListeners();
-  //       hold = null;
-  //     }
-  //   });
-  // }
-
-  // let stackHeight = 0;
-
-// for (let i = 0; i < placeholders.length; i++) {
-//     placeholders[i].addEventListener('click', function(evt){
-//         if (hold == "box"){
-//             var originalObject = document.getElementById('js--hold');
-//             var cloneObject = originalObject.cloneNode(true);
-
-//             // Set the position of the cloned object to the position of the placeholder
-//             const placeholderPosition = this.getAttribute('position');
-
-//             // Get the bounding box of the originalObject
-//             const boundingBox = new THREE.Box3().setFromObject(originalObject.object3D);
-//             const objectHeight = (boundingBox.max.y - boundingBox.min.y)/2;
-
-//             if (originalObject.classList.contains('burgerBottom')) 
-//               stackHeight = 0;
-//             else
-//               stackHeight = objectHeight * 0.5;
-
-//             cloneObject.setAttribute("position", { x: placeholderPosition.x, y: placeholderPosition.y + stackHeight, z: placeholderPosition.z });
-//             console.log(stackHeight);           
-//             cloneObject.setAttribute('id', "free");
-//             scene.appendChild(cloneObject);
-//             originalObject.parentNode.removeChild(originalObject);
-//             addListeners();
-//             hold = null;
-//         }
-//     });
-// }
-
 }
 
