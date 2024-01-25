@@ -41,11 +41,7 @@ function pickupElementsWeb(assets, keyGenerator) {
           cloneObject.setAttribute('id', "js--hold");
           camera.appendChild(cloneObject);
           hold = "box"
-          try {
-            this.remove();// Error
-          } catch(error) {
-            console.error("Error in obb-collider component:", error);
-          }
+          this.remove();
         }
       });
     }
@@ -55,7 +51,7 @@ function pickupElementsWeb(assets, keyGenerator) {
     if (hold == "box") {
       var originalObject = document.getElementById('js--hold');
       var cloneObject = originalObject.cloneNode(true);
-
+      console.log(targetElement);
       if (targetElement.classList.contains("stove")) {
         var originalObject = document.getElementById('js--hold');
         var cloneObject = originalObject.cloneNode(true);
@@ -74,11 +70,7 @@ function pickupElementsWeb(assets, keyGenerator) {
   
         cloneObject.setAttribute('id', "free");
         scene.appendChild(cloneObject);
-        try {
-          originalObject.parentNode.removeChild(originalObject); // error
-        } catch (error) {
-          console.error("Error in obb-collider component:", error);
-        }
+        originalObject.parentNode.removeChild(originalObject);
         addListeners();
         hold = null;
       }
