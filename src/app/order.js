@@ -15,7 +15,7 @@ function reload() {
     assets = loader.load().get();
     keyGenerator = loader.getKeys();
     orderList = resolveOrderSceneComponents(assets);
-
+    console.log(orderList);
     teleport();
     pickupElementsWeb(assets, keyGenerator);
 }
@@ -81,15 +81,16 @@ function compareListEquel(originalList, listToCheck) {
 
 function checkOrder() {
     let correctFlag = false;
-    correctFlag = compareListEquel(orderList, assets.items);
+    correctFlag = compareListEquel(orderList.reverse(), assets.items);
+    console.log(orderList);
     console.log(assets.items);
     if (correctFlag){
         alert("The order is correct");
-        location.reload();
+        // setTimeout(() => location.reload(), 5000);
     }
     else {
         alert("The order is incorrect");
         reload();
-        location.reload();
+        // setTimeout(() => location.reload(), 5000);
     }
 }

@@ -2,8 +2,8 @@ const BURGER_CLASS = ".burger";
 const LETTUCE_CLASS = ".lettuce";
 const CHEESE_CLASS = ".cheese";
 const TOMATO_CLASS = ".tomato";
-const BURGER_TOP_CLASS = ".burgertop";
-const BURGER_BOTTOM_CLASS = ".burgerbottom";
+const BURGER_TOP_CLASS = ".burgerTop";
+const BURGER_BOTTOM_CLASS = ".burgerBottom";
 
 class OrderSceneComponents {
     constructor(
