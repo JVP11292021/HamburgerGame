@@ -50,7 +50,7 @@ function pickupElementsWeb(assets, keyGenerator) {
     if (hold == "box") {
       var originalObject = document.getElementById('js--hold');
       var cloneObject = originalObject.cloneNode(true);
-      console.log(targetElement);
+
       if (targetElement.classList.contains("stove")) {
         var originalObject = document.getElementById('js--hold');
         var cloneObject = originalObject.cloneNode(true);
