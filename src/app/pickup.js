@@ -6,6 +6,7 @@ function pickupElementsWeb(assets, keyGenerator) {
   const placeholders = document.getElementsByClassName('js--placeholder');
   let scene = document.getElementById('js--scene');
   var sound = document.querySelector('[sound]');
+  
 
   function checkAttribute(pickupElement) {
     const classNamesToCheck = ['burger', 'lettuce', 'tomato', 'burgerTop', 'burgerBottom', 'cheese'];
@@ -34,7 +35,6 @@ function pickupElementsWeb(assets, keyGenerator) {
     for (let i = 0; i < pickups.length; i++) {
       pickups[i].addEventListener('click', function(evt){
         if (hold == null) {
-          checkAttribute(this);
           let cloneObject = this.cloneNode(true);
           cloneObject.setAttribute('position', {x: "1", y:"0.01", z: "-1"});
           cloneObject.setAttribute('rotation', {x: "50", y:"120", z:"-40"});
@@ -48,31 +48,31 @@ function pickupElementsWeb(assets, keyGenerator) {
   } 
 
   function handleObjectPlacement(targetElement) {
-    if (hold == "box") {
-      var originalObject = document.getElementById('js--hold');
-      var cloneObject = originalObject.cloneNode(true);
-      console.log(targetElement);
-      if (targetElement.classList.contains("stove")) {
+    let pickups = document.getElementsByClassName('js--pickup');
+    for (let i = 0; i < pickups.length; i++) { 
+      if (hold == "box") {
         var originalObject = document.getElementById('js--hold');
         var cloneObject = originalObject.cloneNode(true);
-        cloneObject.setAttribute("position",{x: '-0.122', y: '1.418', z: '1.317'});
-        cloneObject.setAttribute('id', "free");
-        scene.appendChild(cloneObject);
-        originalObject.parentNode.removeChild(originalObject);
-        sound.components.sound.playSound();
-        addListeners();
-        hold = null;
-      }
-      else if (targetElement.classList.contains("plate")) {
-        const placeholderPosition = targetElement.getAttribute('position');
-        cloneObject.setAttribute("position", { x: placeholderPosition.x, y: placeholderPosition.y + stackHeight, z: placeholderPosition.z });
-        stackHeight += 0.03;
-  
-        cloneObject.setAttribute('id', "free");
-        scene.appendChild(cloneObject);
-        originalObject.parentNode.removeChild(originalObject);
-        addListeners();
-        hold = null;
+    
+        if (targetElement.classList.contains("stove")) {
+          cloneObject.setAttribute("position", { x: '-0.122', y: '1.418', z: '1.317' });
+          cloneObject.setAttribute('id', "free");
+          scene.appendChild(cloneObject);
+          originalObject.parentNode.removeChild(originalObject);
+          sound.components.sound.playSound();
+          addListeners();
+          hold = null;
+        } else if (targetElement.classList.contains("plate")) {
+          checkAttribute(pickups[i])
+          const placeholderPosition = targetElement.getAttribute('position');
+          cloneObject.setAttribute("position", { x: placeholderPosition.x, y: placeholderPosition.y + stackHeight, z: placeholderPosition.z });
+          stackHeight += 0.03;
+          cloneObject.setAttribute('id', "free");
+          scene.appendChild(cloneObject);
+          originalObject.parentNode.removeChild(originalObject);
+          addListeners();
+          hold = null;
+        }
       }
     }
   }

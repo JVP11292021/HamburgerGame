@@ -16,7 +16,7 @@ function reload() {
     assets = loader.load().get();
     keyGenerator = loader.getKeys();
     orderList = resolveOrderSceneComponents(assets);
-    console.log(orderList);
+
     teleport();
     pickupElementsWeb(assets, keyGenerator);
 }
@@ -87,6 +87,7 @@ function checkOrder() {
     let scene = document.getElementById('js--scene');
     const SCENE_RELOAD_DELAY = 15000;
 
+
     if (correctFlag){
         alert("The order is correct");
 
@@ -100,7 +101,7 @@ function checkOrder() {
         winText.setAttribute('font', 'kelsonsans');
         scene.appendChild(winText);
 
-        setTimeout(() => location.reload(), SCENE_RELOAD_DELAY);
+        // setTimeout(() => location.reload(), SCENE_RELOAD_DELAY);
     }
     else {
         alert("The order is incorrect");
@@ -116,6 +117,6 @@ function checkOrder() {
         loseText.setAttribute('font', 'kelsonsans');
         scene.appendChild(loseText);
 
-        setTimeout(() => location.reload(), SCENE_RELOAD_DELAY);
+        // setTimeout(() => location.reload(), SCENE_RELOAD_DELAY);
     }
 }
