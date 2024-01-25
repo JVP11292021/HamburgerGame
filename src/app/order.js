@@ -82,15 +82,39 @@ function compareListEquel(originalList, listToCheck) {
 function checkOrder() {
     let correctFlag = false;
     correctFlag = compareListEquel(orderList.reverse(), assets.items);
-    console.log(orderList);
-    console.log(assets.items);
+
+    let scene = document.getElementById('js--scene');
+    const SCENE_RELOAD_DELAY = 15000;
+
     if (correctFlag){
         alert("The order is correct");
-        // setTimeout(() => location.reload(), 5000);
+
+        const winText = document.createElement('a-text');
+        winText.setAttribute('value', 'You Did It! Game will be reloaded');
+        winText.setAttribute('position', '-0.814 1.854 -0.093');
+        winText.setAttribute('rotation', '0 90 0');
+        winText.setAttribute('color', 'white');
+        winText.setAttribute('align', 'center');
+        winText.setAttribute('scale', '0.5 0.5 0.5');
+        winText.setAttribute('font', 'kelsonsans');
+        scene.appendChild(winText);
+
+        setTimeout(() => location.reload(), SCENE_RELOAD_DELAY);
     }
     else {
         alert("The order is incorrect");
         reload();
-        // setTimeout(() => location.reload(), 5000);
+
+        const loseText = document.createElement('a-text');
+        loseText.setAttribute('value', 'You Lose! Game will be reloaded');
+        loseText.setAttribute('position', '-0.814 1.854 -0.093');
+        loseText.setAttribute('rotation', '0 90 0');
+        loseText.setAttribute('color', 'white');
+        loseText.setAttribute('align', 'center');
+        loseText.setAttribute('scale', '0.5 0.5 0.5');
+        loseText.setAttribute('font', 'kelsonsans');
+        scene.appendChild(loseText);
+
+        setTimeout(() => location.reload(), SCENE_RELOAD_DELAY);
     }
 }
