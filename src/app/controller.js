@@ -1,26 +1,27 @@
 let swBool = false;
 let obbCollisionStarted = false;
 let gripDown = false;
+let interactedObject;
 
 function pickup() {
     if (obbCollisionStarted && gripDown && !swBool) {
         // Get the hand element
+        let object = document.getElementById("burgert")
         let hand = document.getElementById("rightHand");
 
         // Get the box element
-        let box = document.getElementById("box");
-        box.setAttribute("visible", "false");
+        object.setAttribute("visible", "false");
 
         // Clone the box element
-        let clonedBox = box.cloneNode(true);
+        let clonedObject = object.cloneNode(true);
 
         // Modify the position attribute of the cloned box
-        clonedBox.setAttribute("position", "0 0 0");
-        clonedBox.setAttribute("id", "clonebox");
-        clonedBox.removeAttribute("obb-collision");
+        clonedObject.setAttribute("position", "0 0 0");
+        clonedObject.setAttribute("id", "cloneobject");
+        clonedObject.removeAttribute("obb-collision");
 
         // Append the cloned box to the hand element
-        hand.appendChild(clonedBox);
+        hand.appendChild(clonedObject);
 
         swBool = true;
     }
@@ -28,25 +29,31 @@ function pickup() {
 
 function release() {
     swBool = false
-    let clonebox = document.getElementById("clonebox")
+    let cloneobject = document.getElementById("cloneobject")
     let hand = document.getElementById("rightHand");
     let box = document.getElementById("box");
     const position = hand.getAttribute("position")
     const rotation = hand.getAttribute("rotation")
-    clonebox.remove();
+    cloneobject.remove();
     box.setAttribute("position", position)
     box.setAttribute("rotation", rotation)
     box.setAttribute("visible", "true");
 }
 
 const main = () => {
-    var box = document.getElementById("box");
+    let objectList = document.getElementsByClassName("js--interact")
     let hand = document.getElementById("rightHand");
 
-    box.addEventListener("obbcollisionstarted", function () {
+    for (let i = 0; i < objectList.length; i++) {
+        const object = objectList[i];
+    object.addEventListener("obbcollisionstarted", function () {
         obbCollisionStarted = true;
         pickup();
     });
+    object.addEventListener("obbcollisionended", function () {
+        obbCollisionStarted = false;
+    });
+    }
 
     hand.addEventListener("gripdown", function () {
         gripDown = true;
@@ -54,9 +61,7 @@ const main = () => {
     });
 
     // Reset the flags when the corresponding events end
-    box.addEventListener("obbcollisionended", function () {
-        obbCollisionStarted = false;
-    });
+
 
     hand.addEventListener("gripup", function () {
         gripDown = false;
