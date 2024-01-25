@@ -67,10 +67,12 @@
                 <a-asset-item id="tomato--mtl" src="burger-assets/Tomato_af.mtl"></a-asset-item>
                 <a-asset-item id="plateRectangle--obj" src="burger-assets/plate_rectangle.obj"></a-asset-item>
                 <a-asset-item id="plateRectangle--mtl" src="burger-assets/plate_rectangle.mtl"></a-asset-item>
+                <a-asset-item id="rawBurger--obj" src="burger-assets/BurgerRawGoed.obj"></a-asset-item>
+                <a-asset-item id="rawBurger--mtl" src="burger-assets/BurgerRawGoed.mtl"></a-asset-item>
                 <audio id="grill" src="burger-assets/Sound/hamburgerGrill.mp3" preload="auto"></audio>
             </a-assets>
 
-            <a-entity sound="src: #grill; volume: 15"></a-entity>
+            <a-entity sound="src: #grill; volume: 15; autoplay: true"></a-entity>
 
             <!-- <a-entity camera look-controls wasd-controls></a-entity> -->
             <a-camera id="js--camera">
@@ -187,9 +189,9 @@
             <!-- Food models -->
             <a-entity
             id="parentObject" 
-            class=" js--pickup js--interact burger"
+            class="js--pickup js--interact burger"
             scale="0.012 0.012 0.012"
-            obj-model= "obj: #burger--obj; mtl: #burger--mtl"
+            obj-model= "obj: #rawBurger--obj; mtl: #rawBurger--mtl"
             position="-0.645 1.416 0.020"
             soundhandler
             ></a-entity>
@@ -198,7 +200,7 @@
             id="parentObject" 
             class=" js--pickup js--interact burger"
             scale="0.012 0.012 0.012"
-            obj-model= "obj: #burger--obj; mtl: #burger--mtl"
+            obj-model= "obj: #rawBurger--obj; mtl: #rawBurger--mtl"
             position="-0.572 1.416 0.020"
             soundhandler
             ></a-entity>
