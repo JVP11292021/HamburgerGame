@@ -46,10 +46,12 @@
                 <a-asset-item id="breadTop--mtl" src="burger-assets/Bread_top.mtl"></a-asset-item>
                 <a-asset-item id="tomato--obj" src="burger-assets/Tomato_af.obj"></a-asset-item>
                 <a-asset-item id="tomato--mtl" src="burger-assets/Tomato_af.mtl"></a-asset-item>
+                <a-asset-item id="plateRectangle--obj" src="burger-assets/plate_rectangle.obj"></a-asset-item>
+                <a-asset-item id="plateRectangle--mtl" src="burger-assets/plate_rectangle.mtl"></a-asset-item>
                 <audio id="grill" src="burger-assets/Sound/hamburgerGrill.mp3" preload="auto"></audio>
             </a-assets>
 
-            <a-entity sound="src: #grill"></a-entity>
+            <a-entity sound="src: #grill; volume: 15"></a-entity>
 
             <!-- <a-entity camera look-controls wasd-controls></a-entity> -->
             <a-camera id="js--camera">
@@ -101,22 +103,6 @@
             color="white" align="center" 
             scale="0.5 0.5 0.5"
             font="kelsonsans"></a-text>
-<!-- 
-            <a-text 
-            value="Here comes text"
-            position="-0.814 1.854 -0.093" 
-            rotation="0 90 0"
-            color="white" align="center" 
-            scale="0.5 0.5 0.5"
-            font="kelsonsans"></a-text> -->
-            
-            <!-- <a-box class="lettuce"></a-box>
-            <a-box class="burger"></a-box>
-            <a-box class="cheese"></a-box>
-            <a-box class="tomato"></a-box>
-            <a-box class="burgertop"></a-box>
-            <a-box class="burgerbottom"></a-box> -->
-
 
             <!-- Teleport positions -->
             <a-sphere id="teleportStation" class="js--place" position="-0.1827 1 -0.37453" radius="0.1" color="yellow"></a-sphere>
@@ -195,16 +181,45 @@
             class=" js--pickup js--interact burger"
             scale="0.012 0.012 0.012"
             obj-model= "obj: #burger--obj; mtl: #burger--mtl"
-            position="-0.7 1.442 0.0584"
+            position="-0.645 1.416 0.020"
             soundhandler
             ></a-entity>
-<!-- burger position="-0.689 1.440 -0.237" -->
+
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact burger"
+            scale="0.012 0.012 0.012"
+            obj-model= "obj: #burger--obj; mtl: #burger--mtl"
+            position="-0.572 1.416 0.020"
+            soundhandler
+            ></a-entity>
+        <!-- HIERONDER STAAN DE POSITIES VAN DE BURGER ELEMENTEN HOE ZE UITEINDELIJK KUNNEN STAAN VOOR HET BURGER EIND PRODUCT
+                        Y WAARDES VAN BREAD TOP EN BOTTOM KUNNEN DIRECT OVERGENOMEN WORDEN (denk ik) AANGEZIEN DEZE VAST STAAN
+                    DE VOLGORDE VAN HOE HET NU STAAT IS VAN BENEDEN NAAR BOVEN
+                    -CHEESE
+                    -LETTUCE
+                    -BURGER
+                    -TOMATO-->
+        <!-- burger position="-0.689 1.440 -0.237" -->
+        <!-- cheese position="-0.700 1.442 -0.239" -->
+        <!-- breadBottom position="-0.717 1.405 -0.237" -->
+        <!-- breadTop position="-0.711 1.477 -0.228" -->
+        <!-- tomato position="-0.701 1.458 -0.239" -->
+        <!-- lettuce position="-0.701 1.454 -0.239" -->
             <a-entity
             id="parentObject" 
             class=" js--pickup js--interact cheese"
             scale="0.2 0.2 0.2"
             obj-model= "obj: #cheese--obj; mtl: #cheese--mtl"
-            position="-0.700 1.442 0.058"
+            position="-0.775 1.424 -0.723"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact cheese"
+            scale="0.2 0.2 0.2"
+            obj-model= "obj: #cheese--obj; mtl: #cheese--mtl"
+            position="-0.660 1.424 -0.723"
             ></a-entity>
 
             <a-entity
@@ -212,7 +227,23 @@
             class="js--pickup js--interact burgerBottom"
             scale="0.022 0.022 0.022"
             obj-model= "obj: #breadBottom--obj; mtl: #breadBottom--mtl"
-            position="-0.717 1.405 0.057"
+            position="-0.835 1.405 0.305"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class="js--pickup js--interact burgerbottom"
+            scale="0.022 0.022 0.022"
+            obj-model= "obj: #breadBottom--obj; mtl: #breadBottom--mtl"
+            position="-0.835 1.405 0.205"
+            ></a-entity>
+    
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact burgertop"
+            scale="0.02 0.02 0.02"
+            obj-model= "obj: #breadTop--obj; mtl: #breadTop--mtl"
+            position="-0.633 1.433 0.318"
             ></a-entity>
 
             <a-entity
@@ -220,7 +251,7 @@
             class=" js--pickup js--interact burgerTop"
             scale="0.02 0.02 0.02"
             obj-model= "obj: #breadTop--obj; mtl: #breadTop--mtl"
-            position="-0.711 1.477 0.072"
+            position="-0.633 1.433 0.215"
             ></a-entity>
 
             <a-entity
@@ -228,7 +259,15 @@
             class=" js--pickup js--interact tomato"
             scale="0.03 0.03 0.03"
             obj-model= "obj: #tomato--obj; mtl: #tomato--mtl"
-            position="-0.701 1.458 0.068"
+            position="-0.834 1.420 0.020"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact tomato"
+            scale="0.03 0.03 0.03"
+            obj-model= "obj: #tomato--obj; mtl: #tomato--mtl"
+            position="-0.766 1.420 0.020"
             ></a-entity>
 
             <a-entity
@@ -236,7 +275,15 @@
             class=" js--pickup js--interact lettuce"
             scale="0.05 0.05 0.05"
             obj-model= "obj: #lettuce--obj; mtl: #lettuce--mtl"
-            position="-0.693 1.454 0.062"
+            position="-0.782 1.427 -0.494"
+            ></a-entity>
+
+            <a-entity
+            id="parentObject" 
+            class=" js--pickup js--interact lettuce"
+            scale="0.05 0.05 0.05"
+            obj-model= "obj: #lettuce--obj; mtl: #lettuce--mtl"
+            position="-0.662 1.427 -0.494"
             ></a-entity>
 
             <!-- Plate -->
@@ -244,8 +291,53 @@
             class="js--placeholder js--interact"
             obj-model="obj: #plate--obj; mtl: #plate--mtl"
             position="-0.717 1.419 -0.237"
-            scale="0.9 0.9 0.9"
-        ></a-entity>
+            scale="0.8 0.8 0.8"
+            ></a-entity>
+
+            <a-entity
+            class="js--placeholder js--interact"
+            obj-model="obj: #plate--obj; mtl: #plate--mtl"
+            position="-0.815 1.419 0.255"
+            scale="0.4 0.4 0.6"
+            ></a-entity>
+
+            <a-entity
+            class="js--placeholder js--interact"
+            obj-model="obj: #plate--obj; mtl: #plate--mtl"
+            position="-0.620 1.419 0.255"
+            scale="0.4 0.4 0.6"
+            ></a-entity>
+
+            <a-entity
+            class="js--placeholder js--interact"
+            obj-model="obj: #plateRectangle--obj; mtl: #plateRectangle--mtl"
+            position="-0.622 1.423 0.020"
+            scale="0.04 0.04 0.07"
+            ></a-entity>
+
+            <a-entity
+            class="js--placeholder js--interact"
+            obj-model="obj: #plateRectangle--obj; mtl: #plateRectangle--mtl"
+            position="-0.800 1.423 0.020"
+            scale="0.04 0.04 0.07"
+            ></a-entity>
+
+            <a-entity
+            class="js--placeholder js--interact"
+            obj-model="obj: #plateRectangle--obj; mtl: #plateRectangle--mtl"
+            position="-0.724 1.423 -0.725"
+            scale="0.07 0.07 0.07"
+            ></a-entity>
+
+            <a-entity
+            class="js--placeholder js--interact"
+            obj-model="obj: #plateRectangle--obj; mtl: #plateRectangle--mtl"
+            position="-0.724 1.423 -0.494"
+            scale="0.07 0.07 0.07"
+            ></a-entity>
+           
+            
+            <!-- <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity> -->
         </a-scene>
     </body>
 </html>

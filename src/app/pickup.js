@@ -86,6 +86,30 @@ function pickupElementsWeb(assets, keyGenerator) {
               addListeners();
               hold = null;
           }
+        });
+      }
+
+    var sound = document.querySelector('[sound]');
+
+    for (let i = 0; i < placeholders.length; i++) {
+        placeholders[i].addEventListener('click', function(evt){
+          if (hold == "box"){
+            var originalObject = document.getElementById('js--hold');
+            var cloneObject = originalObject.cloneNode(true);
+            cloneObject.setAttribute("position",{x: '-0.122', y: '1.418', z: '1.317'});
+            cloneObject.setAttribute('id', "free");
+            scene.appendChild(cloneObject);
+            originalObject.parentNode.removeChild(originalObject);
+
+            // cloneObject.dispatchEvent(new Event('element-moved'));
+            console.log('element moved');
+
+            sound.components.sound.playSound();
+            console.log("IK SPEEL NU AF")
+
+            addListeners();
+            hold = null;
+          }
       });
   }
   // let stackHeight = 0;
