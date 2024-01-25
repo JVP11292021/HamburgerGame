@@ -41,7 +41,11 @@ function pickupElementsWeb(assets, keyGenerator) {
           cloneObject.setAttribute('id', "js--hold");
           camera.appendChild(cloneObject);
           hold = "box"
-          this.remove();// Error
+          try {
+            this.remove();// Error
+          } catch(error) {
+            console.error("Error in obb-collider component:", error);
+          }
         }
       });
     }
@@ -70,7 +74,11 @@ function pickupElementsWeb(assets, keyGenerator) {
   
         cloneObject.setAttribute('id', "free");
         scene.appendChild(cloneObject);
-        originalObject.parentNode.removeChild(originalObject); // error
+        try {
+          originalObject.parentNode.removeChild(originalObject); // error
+        } catch (error) {
+          console.error("Error in obb-collider component:", error);
+        }
         addListeners();
         hold = null;
       }
