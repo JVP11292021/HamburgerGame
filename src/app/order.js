@@ -8,7 +8,7 @@ window.onload = () => {
     orderList = resolveOrderSceneComponents(assets);
 
     teleport();
-    pickupElementsWeb(assets, keyGenerator);
+    // pickupElementsWeb(assets, keyGenerator);
       
 }
 
@@ -18,7 +18,7 @@ function reload() {
     orderList = resolveOrderSceneComponents(assets);
     console.log(orderList);
     teleport();
-    pickupElementsWeb(assets, keyGenerator);
+    // pickupElementsWeb(assets, keyGenerator);
 }
 
 function resolveOrderSceneComponents(componentList) {

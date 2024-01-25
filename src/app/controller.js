@@ -38,6 +38,7 @@ function release() {
 }
 
 const main = () => {
+    let stackHeight = 0;
     let objectList = document.getElementsByClassName("js--interact")
     let hand = document.getElementById("rightHand");
     let stovecol = document.getElementById("stove")
@@ -82,6 +83,7 @@ const main = () => {
     platecol.addEventListener("obbcollisionstarted", function () {
         if (!gripDown) {
             //Nu zet hij het ingrediënt de position op de position van het bord en rotation naar 0 0 0 (zodat die horizontaal is)
+            const placeholderPosition = platecol.getAttribute('position');
             interactedObject.setAttribute("position", { x: placeholderPosition.x, y: placeholderPosition.y + stackHeight, z: placeholderPosition.z })
             interactedObject.setAttribute("rotation", "0 0 0")
             stackHeight += 0.03;
