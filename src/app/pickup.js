@@ -32,10 +32,14 @@ function pickupElementsWeb(assets, keyGenerator) {
 
   function addListeners() {
     let pickups = document.getElementsByClassName('js--pickup');
+
     for (let i = 0; i < pickups.length; i++) {
       pickups[i].addEventListener('click', function(evt){
         if (hold == null) {
           let cloneObject = this.cloneNode(true);
+          if(modelChanged === true){
+            changeModel(cloneObject);
+          }
           cloneObject.setAttribute('position', {x: "1", y:"0.01", z: "-1"});
           cloneObject.setAttribute('rotation', {x: "50", y:"120", z:"-40"});
           cloneObject.setAttribute('id', "js--hold");
@@ -47,6 +51,12 @@ function pickupElementsWeb(assets, keyGenerator) {
     }
   } 
 
+let modelChanged = false;
+
+  function changeModel(objectOnStove){
+        objectOnStove.setAttribute('obj-model', "obj: #burger--obj; mtl: #burger--mtl")
+  };
+  
   function handleObjectPlacement(targetElement) {
     let pickups = document.getElementsByClassName('js--pickup');
     for (let i = 0; i < pickups.length; i++) { 
@@ -59,12 +69,30 @@ function pickupElementsWeb(assets, keyGenerator) {
           cloneObject.setAttribute('id', "free");
           scene.appendChild(cloneObject);
           originalObject.parentNode.removeChild(originalObject);
-          sound.components.sound.playSound();
+          
+        if(cloneObject.getAttribute("data-raw-id") === null){
+          addListeners();
+          hold = null;
+          }
+          
+          else if(cloneObject.getAttribute("data-raw-id") === "rawBurger1" || "rawBurger2"){
+            sound.components.sound.playSound();
+            setTimeout(() => {
+              changeModel(cloneObject);
+              modelChanged = true;
+
+              sound.components.sound.stopSound(); 
+        }, 15000);
+          }
           addListeners();
           hold = null;
         } else if (targetElement.classList.contains("plate")) {
           checkAttribute(pickups[i])
           const placeholderPosition = targetElement.getAttribute('position');
+          if(modelChanged === true ){
+            changeModel(cloneObject);
+            modelChanged = false;
+          }
           cloneObject.setAttribute("position", { x: placeholderPosition.x, y: placeholderPosition.y + stackHeight, z: placeholderPosition.z });
           stackHeight += 0.03;
           cloneObject.setAttribute('id', "free");

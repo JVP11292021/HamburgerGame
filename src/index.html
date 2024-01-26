@@ -32,8 +32,6 @@
                 <a-asset-item id="bell-m" src="kitchen-elements/Bell.mtl"></a-asset-item>
                 <a-asset-item id="burger--obj" src="burger-assets/Burger.obj"></a-asset-item>
                 <a-asset-item id="burger--mtl" src="burger-assets/Burger.mtl"></a-asset-item>
-                <a-asset-item id="burger--obj" src="burger-assets/Burger.obj"></a-asset-item>
-                <a-asset-item id="burger--mtl" src="burger-assets/Burger.mtl"></a-asset-item>
                 <a-asset-item id="lettuce--obj" src="burger-assets/Lettuce.obj"></a-asset-item>
                 <a-asset-item id="lettuce--mtl" src="burger-assets/Lettuce.mtl"></a-asset-item>
                 <a-asset-item id="cheese--obj" src="burger-assets/cheeseCut.obj"></a-asset-item>
@@ -48,6 +46,8 @@
                 <a-asset-item id="tomato--mtl" src="burger-assets/Tomato_af.mtl"></a-asset-item>
                 <a-asset-item id="plateRectangle--obj" src="burger-assets/plate_rectangle.obj"></a-asset-item>
                 <a-asset-item id="plateRectangle--mtl" src="burger-assets/plate_rectangle.mtl"></a-asset-item>
+                <a-asset-item id="burgerRaw--obj" src="burger-assets/BurgerRawGoed.obj"></a-asset-item>
+                <a-asset-item id="burgerRaw--mtl" src="burger-assets/BurgerRawGoed.mtl"></a-asset-item>
                 <audio id="grill" src="burger-assets/Sound/hamburgerGrill.mp3" preload="auto"></audio>
             </a-assets>
 
@@ -112,7 +112,7 @@
             <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: highPoly; color: #ffcccc" obb-collider>
             </a-entity>
 
-            <a-obj-model src="#burger--obj" mtl="#burger--mtl" id="box" visible="true" obb-collider="minimumColliderDimension: 0.01" scale="0.1 0.1 0.1" position="0.3 0.2 0"></a-obj-model>
+            <!-- <a-obj-model src="#burger--obj" mtl="#burger--mtl" id="box" visible="true" obb-collider="minimumColliderDimension: 0.01" scale="0.1 0.1 0.1" position="0.3 0.2 0"></a-obj-model> -->
 
 
             <!-- Models -->
@@ -177,19 +177,21 @@
 
             <!-- Food models -->
             <a-entity
+            data-raw-id="rawBurger1"    
             id="parentObject" 
-            class=" js--pickup js--interact burger"
+            class=" js--pickup js--interact burgerraw"
             scale="0.012 0.012 0.012"
-            obj-model= "obj: #burger--obj; mtl: #burger--mtl"
+            obj-model= "obj: #burgerRaw--obj; mtl: #burgerRaw--mtl"
             position="-0.645 1.416 0.020"
             soundhandler
             ></a-entity>
 
             <a-entity
+            data-raw-id="rawBurger2"
             id="parentObject" 
-            class=" js--pickup js--interact burger"
+            class=" js--pickup js--interact burgerraw"
             scale="0.012 0.012 0.012"
-            obj-model= "obj: #burger--obj; mtl: #burger--mtl"
+            obj-model= "obj: #burgerRaw--obj; mtl: #burgerRaw--mtl"
             position="-0.572 1.416 0.020"
             soundhandler
             ></a-entity>
